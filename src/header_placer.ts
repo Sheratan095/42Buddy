@@ -7,9 +7,6 @@ const utils = require('./utils')
 const header_height : number = 11;
 const header_length: number = 81;
 
-//TO DO da levare e mettere nella config
-const intra_username = "maceccar"
-
 export function place_header() : boolean
 {
 	//Precondition, check if an workspace is open
@@ -112,19 +109,19 @@ function format_new_header(file_path: string): string[]
 	header[4] = "/*                                                    +:+ +:+         +:+     */";
 
 	// header[5] (Author)
-	header[5] = `/*   By: ${intra_username} <${intra_username}@student.42.fr>`;
+	header[5] = `/*   By: ${utils.getConfigValue("42Buddy.Username")} <${utils.getConfigValue("42Buddy.Email")}>`;
 	padding = header_length - header[5].length - "+#+  +:+       +#+        */".length - 1;
 	header[5] += ' '.repeat(padding) + "+#+  +:+       +#+        */";
 
 	header[6] = "/*                                                +#+#+#+#+#+   +#+           */";
 
 	// header[7] (Creation)
-	header[7] = `/*   Created: ${utils.get_correct_date_format(info.birthtime)} by ${intra_username}`;
+	header[7] = `/*   Created: ${utils.get_correct_date_format(info.birthtime)} by ${utils.getConfigValue("42Buddy.Username")}`;
 	padding = header_length - header[7].length - "#+#    #+#             */".length - 1;
 	header[7] += ' '.repeat(padding) + "#+#    #+#             */";
 
 	// header[8] (Update)
-	header[8] = `/*   Updated: ${utils.get_correct_date_format(temp_change_date)} by ${intra_username}`;
+	header[8] = `/*   Updated: ${utils.get_correct_date_format(temp_change_date)} by ${utils.getConfigValue("42Buddy.Username")}`;
 	padding = header_length - header[8].length - "###   ########.fr       */".length - 1;
 	header[8] += ' '.repeat(padding) + "###   ########.fr       */";
 

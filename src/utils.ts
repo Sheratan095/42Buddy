@@ -1,3 +1,5 @@
+import * as vscode from 'vscode';
+
 const fs = require('fs');
 const path = require('path');
 
@@ -48,4 +50,9 @@ export function get_correct_date_format(date: Date):string
 	const seconds = String(date.getSeconds()).padStart(2, '0');
 
 	return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+}
+
+// Function to retrieve a configuration value
+export function getConfigValue(key: string): any {
+    return vscode.workspace.getConfiguration().get(key);
 }
