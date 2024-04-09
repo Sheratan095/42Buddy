@@ -11,7 +11,7 @@ export function place_header() : boolean
 {
 	//Precondition, check if an workspace is open
 	if (vscode.workspace.workspaceFolders == undefined)
-		return (console.log("Open a folder to execute this command"), false)
+		return (vscode.window.showInformationMessage("Open a folder to execute this command"), false)
 
 	//We take as an assumption that just on folder is open in the workspace
 	// TO DO, do the same thing in all folder in the workspace
@@ -22,7 +22,7 @@ export function place_header() : boolean
 	for (let file of files)
 	{
 		//Get all lines
-		let lines:string[] = fs.readFileSync(file, 'utf-8').split('\n');
+		let lines:string[] = fs.readFileSync(file, 'utf-8').split(/\r?\n/);
 
 		//Get new header
 		let new_lines :string[] = format_new_header(file);
@@ -32,12 +32,16 @@ export function place_header() : boolean
 
 		//Conditionally insert the newline at the end of file
 		if (lines[lines.length - 1] != "")
+		{
+			console.log(`|${lines[lines.length - 1]}|`);
 			elements_to_copy.push("");
+		}
 
 		//Adding all the test to the file
 		fs.appendFileSync(file, new_lines.concat(elements_to_copy).join('\n'));
 	}
 
+	vscode.window.showInformationMessage("42 Header has been placed");
 	return (true);
 }
 
