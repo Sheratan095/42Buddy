@@ -6,9 +6,9 @@
   "name": "42buddy",
   "description": "A vscode extension to help all 42 studens during their path in the school",
   "displayName": "42Buddy",
-  "icon":"./Imgs/robot-dog.png",
+  "icon": "./Imgs/robot-dog.png",
   "publisher": "Sheratan",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "engines": {
     "vscode": "^1.87.0"
   },
