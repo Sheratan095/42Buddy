@@ -4,11 +4,11 @@
     "url": "https://github.com/Sheratan095/42Buddy.git"
   },
   "name": "42buddy",
+  "descript.": "./Imgs/robot-dog.png",
   "displayName": "42Buddy",
   "publisher": "Sheratan",
-  "description": "",
   "version": "1.2.1",
-  "engines": {
+    "engines": {
     "vscode": "^1.87.0"
   },
   "categories": [

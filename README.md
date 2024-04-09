@@ -1,6 +1,6 @@
-![ciao]("/Imgs/robot-dog.png")
-
-<br>
+<p align="center">
+  <img src="./Imgs/robot-dog.png"  width="150" height="150"/>
+</p>
 
 # 42 BUDDY
 
