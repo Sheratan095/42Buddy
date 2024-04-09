@@ -7,7 +7,7 @@
   "descript.": "./Imgs/robot-dog.png",
   "displayName": "42Buddy",
   "publisher": "Sheratan",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "engines": {
     "vscode": "^1.87.0"
   },
