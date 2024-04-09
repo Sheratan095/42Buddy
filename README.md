@@ -1,5 +1,6 @@
-<a href="https://www.flaticon.com/free-icons/robot-dog"></a>
+![ciao]("/Imgs/robot-dog.png")
 
+<br>
 
 # 42 BUDDY
 
@@ -10,11 +11,13 @@ Vs code marketplace link: [Sheratan.42buddy](https://marketplace.visualstudio.co
 GitHub profile: [Sheratan095](https://github.com/Sheratan095)
 
 42 intra profile: [Maceccar](https://profile.intra.42.fr/users/maceccar)
+
+<br>
+
 ## Configuration
 
 To conifigure the extension with your intra parameters you have to search in the settings for **42buddy** and set **Email** and **Username** proprieties
 
-<br>
 <br>
 
 ## FEATURES
