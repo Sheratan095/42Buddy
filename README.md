@@ -13,7 +13,11 @@ GitHub profile: [Sheratan095](https://github.com/Sheratan095)
 ## Configuration
 
 To conifigure the extension with your intra parameters you have to search in the settings for **42buddy** and set **Email** and **Username** proprieties
-## Appendix
+
+<br>
+<br>
+
+## FEATURES
 
 All the features can be activated by control panel (_Ctrl + shift + p_)\
 All the features are under _42Buddy_ category
@@ -43,6 +47,8 @@ It insert 42 standard header recursively in all .c and .h file in the opened fol
 ```
 ## TABLE OF CONTENT
 
-- [Introduction](#42-BUDDY)
-- [Configuration](#Configuration)
-- [TABLE OF CONTENT](#table-of-content)
+- [42 BUDDY](#42-buddy)
+  - [Configuration](#configuration)
+  - [FEATURES](#features)
+    - [Header placer](#header-placer)
+  - [TABLE OF CONTENT](#table-of-content)
