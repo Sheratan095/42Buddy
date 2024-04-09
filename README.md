@@ -20,7 +20,7 @@ To conifigure the extension with your intra parameters you have to search in the
 
 <br>
 
-## FEATURES
+## Features
 
 All the features can be activated by control panel (_Ctrl + shift + p_)\
 All the features are under _42Buddy_ category
@@ -28,6 +28,7 @@ All the features are under _42Buddy_ category
 
 - [42 header placer](#usage)
 
+<br>
 
 ### Header placer
 
@@ -48,10 +49,13 @@ It insert 42 standard header recursively in all .c and .h file in the opened fol
 /*                                                                            */
 /* ************************************************************************** */
 ```
+
+<br>
+
 ## TABLE OF CONTENT
 
 - [42 BUDDY](#42-buddy)
-  - [Configuration](#configuration)
-  - [FEATURES](#features)
-    - [Header placer](#header-placer)
-  - [TABLE OF CONTENT](#table-of-content)
+- [Configuration](#configuration)
+- [Features](#features)
+  - [Header placer](#header-placer)
+- [TABLE OF CONTENT](#table-of-content)
