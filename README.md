@@ -51,7 +51,7 @@ It insert 42 standard header recursively in all .c and .h file in the opened fol
 ## TABLE OF CONTENT
 
 - [42 BUDDY](#42-buddy)
-  - [Configuration](#configuration)
-  - [FEATURES](#features)
-    - [Header placer](#header-placer)
-  - [TABLE OF CONTENT](#table-of-content)
+- [Configuration](#configuration)
+- [FEATURES](#features)
+  - [Header placer](#header-placer)
+- [TABLE OF CONTENT](#table-of-content)
