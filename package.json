@@ -1,0 +1,67 @@
+{
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sheratan095/42Buddy.git"
+  },
+  "name": "42buddy",
+  "description": "A vscode extension to help all 42 studens during their path in the school",
+  "displayName": "42Buddy",
+  "icon": "./Imgs/robot-dog.png",
+  "publisher": "Sheratan",
+  "version": "1.4.2",
+  "engines": {
+    "vscode": "^1.87.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "properties": {
+        "42Buddy.Username": {
+          "type": "string",
+          "description": "Username to use in 42 headers"
+        },
+        "42Buddy.Email": {
+          "type": "string",
+          "description": "Email address to use in 42 headers"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "42buddy.place_header",
+        "key": "ctrl+h",
+        "mac": "cmd+h"
+      }
+    ],
+    "commands": [
+      {
+        "command": "42buddy.place_header",
+        "title": "Place 42 header",
+        "category": "42Buddy"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^18.19.26",
+    "@types/vscode": "^1.87.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "@vscode/test-cli": "^0.0.6",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  }
+}
