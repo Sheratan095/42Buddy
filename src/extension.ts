@@ -6,6 +6,7 @@ const header_placer = require('./header_placer')
 
 export function activate(context: vscode.ExtensionContext) {
 
+	vscode.window.showInformationMessage("Open command")
 	let place_header = vscode.commands.registerCommand('42buddy.place_header', () => {
 		header_placer.place_header();
 	});
