@@ -106,7 +106,9 @@ function format_new_header(file_path: string, header_already_exist:boolean, line
 		correct_creation_datetime = lines[7].slice(14, 33);
 	}
 	else
-		correct_creation_datetime = utils.get_correct_date_format(info.birthtime);
+		correct_creation_datetime = utils.get_correct_date_format(info.mtime);
+
+	console.log(correct_creation_datetime);
 
 	// Removing all lines
 	fs.writeFileSync(file_path, '');
