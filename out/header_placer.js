@@ -141,7 +141,7 @@ function format_new_header(file_path, header_already_exist, lines) {
 //	=> 'redirect' to the setting page
 function check_settings() {
     if (utils.getConfigValue("42Buddy.Email") == "" || utils.getConfigValue("42Buddy.Username") == "") {
-        //Lasr '.' just to avoid appearing of other things that shouldn't appear
+        // Last '.' just to avoid appearing of other things that shouldn't appear
         vscode.commands.executeCommand('workbench.action.openSettings', '42Buddy.');
         vscode.window.showErrorMessage('This settings are required, plase fill all fields');
         return (false);
