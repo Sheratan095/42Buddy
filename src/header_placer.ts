@@ -13,6 +13,10 @@ export function place_header() : boolean
 	if (vscode.workspace.workspaceFolders == undefined)
 		return (vscode.window.showInformationMessage("Open a folder to execute this command"), false)
 
+	//Check if all configuration values are set
+	if (!check_settings())
+		return (false);
+
 	// We take as an assumption that just on folder is open in the workspace
 	// TO DO, do the same thing in all folder in the workspace
 
@@ -101,14 +105,11 @@ function format_new_header(file_path: string, header_already_exist:boolean, line
 	//	=> get cretion date time form it
 	if (header_already_exist)
 	{
-		console.log(header_already_exist);
 		// 14 & 33 are respectively start and end of datetime
 		correct_creation_datetime = lines[7].slice(14, 33);
 	}
 	else
 		correct_creation_datetime = utils.get_correct_date_format(info.mtime);
-
-	console.log(correct_creation_datetime);
 
 	// Removing all lines
 	fs.writeFileSync(file_path, '');
@@ -152,4 +153,20 @@ function format_new_header(file_path: string, header_already_exist:boolean, line
 	header[11] = "";
 
 	return (header)
+}
+
+//If a value isn't set
+//	=> 'redirect' to the setting page
+function check_settings()
+{
+	if (utils.getConfigValue("42Buddy.Email") == "" || utils.getConfigValue("42Buddy.Username") == "")
+	{
+		//Lasr '.' just to avoid appearing of other things that shouldn't appear
+		vscode.commands.executeCommand('workbench.action.openSettings', '42Buddy.');
+
+		vscode.window.showErrorMessage('This settings are required, plase fill all fields');
+		return (false);
+	}
+
+	return (true);
 }
