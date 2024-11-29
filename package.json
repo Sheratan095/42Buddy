@@ -4,7 +4,7 @@
     "url": "https://github.com/Sheratan095/42Buddy.git"
   },
   "name": "42buddy",
-  "description": "A vscode extension to help all 42 studens during their path in the school",
+  "description": "A vscode extension to help all 42 students during their path in the school",
   "displayName": "42Buddy",
   "icon": "./Imgs/robot-dog.png",
   "publisher": "Sheratan",
