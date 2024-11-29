@@ -4,7 +4,7 @@
 
 # 42 BUDDY
 
-A vscode extension to help all [42](https://42.fr/) studens during their path in the school
+A vscode extension to help all [42](https://42.fr/) students during their path in the school
 
 Vs code marketplace link: [Sheratan.42buddy](https://marketplace.visualstudio.com/items?itemName=Sheratan.42buddy)
 
