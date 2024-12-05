@@ -1,4 +1,3 @@
-import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -7,48 +6,30 @@ const utils = require('./utils')
 const header_height : number = 11;
 const header_length: number = 81;
 
-export function place_header() : boolean
+export function place_header(file:string) :string
 {
-	// Precondition, check if an workspace is open
-	if (vscode.workspace.workspaceFolders == undefined)
-		return (vscode.window.showInformationMessage("Open a folder to execute this command"), false)
+	// Get all lines
+	let lines:string[] = fs.readFileSync(file, 'utf-8').split(/\r?\n/);
 
-	//Check if all configuration values are set
-	if (!check_settings())
-		return (false);
+	// Establish if header already exists
+	// Header_exist() is required in two methods
+	// => i created a variable to avoid double calling an expensive method
+	let header_already_exist : boolean = header_exist(lines);
 
-	// We take as an assumption that just on folder is open in the workspace
-	// TO DO, do the same thing in all folder in the workspace
+	//Get new header
+	let new_lines :string[] = format_new_header(file, header_already_exist, lines);
 
-	let current_dir = vscode.workspace.workspaceFolders[0].uri.fsPath;
-	const files: string[] = utils.get_files(current_dir);
+	//Get the lines to copy
+	let elements_to_copy:string[] = lines.slice(get_copy_starting_position(lines, header_already_exist));
 
-	for (let file of files)
-	{
-		// Get all lines
-		let lines:string[] = fs.readFileSync(file, 'utf-8').split(/\r?\n/);
+	//Conditionally insert the newline at the end of file
+	if (lines[lines.length - 1] != "")
+		elements_to_copy.push("");
 
-		// Establish if header already exists
-		// Header_exist() is required in two methods
-		// => i created a variable to avoid double calling an expensive method
-		let header_already_exist : boolean = header_exist(lines);
+	//Adding all the test to the file
+	fs.appendFileSync(file, new_lines.concat(elements_to_copy).join('\n'));
 
-		//Get new header
-		let new_lines :string[] = format_new_header(file, header_already_exist, lines);
-
-		//Get the lines to copy
-		let elements_to_copy:string[] = lines.slice(get_copy_starting_position(lines, header_already_exist));
-
-		//Conditionally insert the newline at the end of file
-		if (lines[lines.length - 1] != "")
-			elements_to_copy.push("");
-
-		//Adding all the test to the file
-		fs.appendFileSync(file, new_lines.concat(elements_to_copy).join('\n'));
-	}
-
-	vscode.window.showInformationMessage("42 Header has been placed");
-	return (true);
+	return (file);
 }
 
 // Return the position where start to copy 
@@ -153,20 +134,4 @@ function format_new_header(file_path: string, header_already_exist:boolean, line
 	header[11] = "";
 
 	return (header)
-}
-
-//If a value isn't set
-//	=> 'redirect' to the setting page
-function check_settings()
-{
-	if (utils.getConfigValue("42Buddy.Email") == "" || utils.getConfigValue("42Buddy.Username") == "")
-	{
-		// Last '.' just to avoid appearing of other things that shouldn't appear
-		vscode.commands.executeCommand('workbench.action.openSettings', '42Buddy.');
-
-		vscode.window.showErrorMessage('This settings are required, plase fill all fields');
-		return (false);
-	}
-
-	return (true);
 }
