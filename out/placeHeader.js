@@ -50,7 +50,7 @@ function placeHeader(file) {
 exports.placeHeader = placeHeader;
 // Return the position where start to copy 
 function getCopyStartingPosition(lines, header_already_exist) {
-    //Check if there's something else to write
+    // Check if there's something else to write
     if (lines.length - (header_height) <= 0)
         return (header_height);
     let i = (header_already_exist) ? header_height : 0;
@@ -66,7 +66,7 @@ function headerExist(lines) {
         return false;
     }
     for (let i = 0; i < header_height; i++) {
-        //Second condition in end of line because in linux vscode all the lines end with \r
+        // Second condition in end of line because in linux vscode all the lines end with \r
         //	and in window with \n (char that's used to split lines during file reading)
         if (!(lines[i].startsWith("/*") &&
             (lines[i].endsWith("*/") || lines[i].endsWith("*/\r")))) {

@@ -25,7 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.activate = void 0;
 const vscode = __importStar(require("vscode"));
-//Musn't specify extension like this ('./header_placer.ts')
+// Musn't specify extension like this ('./commands.ts')
 const commands = require('./commands');
 function activate(context) {
     let placeHeaderInAllFiles = vscode.commands.registerCommand('42buddy.place_header_in_all_files', () => {
