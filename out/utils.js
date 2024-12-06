@@ -23,10 +23,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getConfigValue = exports.get_correct_date_format = exports.get_files = void 0;
+exports.getConfigValue = exports.get_correct_date_format = exports.isFileSupported = exports.get_files = void 0;
 const vscode = __importStar(require("vscode"));
 const fs = require('fs');
 const path = require('path');
+const supportedFileTypes = [".c", ".h", ".cpp", ".hpp"];
 //Recursive searching of .c and .h files
 function get_files(root_dir) {
     const resulting_files = [];
@@ -43,15 +44,18 @@ function get_files(root_dir) {
         }
         else {
             // If it's a file, check its extension
-            const extension = path.extname(file);
-            if (extension === ".c" || extension === ".h") {
+            if (isFileSupported(file))
                 resulting_files.push(filePath);
-            }
         }
     }
-    return resulting_files;
+    return (resulting_files);
 }
 exports.get_files = get_files;
+function isFileSupported(filePath) {
+    const extension = path.extname(filePath);
+    return (supportedFileTypes.includes(extension));
+}
+exports.isFileSupported = isFileSupported;
 function get_correct_date_format(date) {
     //String.padStart() is used to ensure that each component
     //	has at least two digits, padding with a leading zero if necessary
@@ -61,12 +65,12 @@ function get_correct_date_format(date) {
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const seconds = String(date.getSeconds()).padStart(2, '0');
-    return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+    return (`${year}/${month}/${day} ${hours}:${minutes}:${seconds}`);
 }
 exports.get_correct_date_format = get_correct_date_format;
 // Function to retrieve a configuration value
 function getConfigValue(key) {
-    return vscode.workspace.getConfiguration().get(key);
+    return (vscode.workspace.getConfiguration().get(key));
 }
 exports.getConfigValue = getConfigValue;
 //# sourceMappingURL=utils.js.map

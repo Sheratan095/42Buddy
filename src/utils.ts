@@ -3,6 +3,8 @@ import * as vscode from 'vscode';
 const fs = require('fs');
 const path = require('path');
 
+const supportedFileTypes:string[] = [".c", ".h", ".cpp", ".hpp"];
+
 //Recursive searching of .c and .h files
 export function get_files(root_dir: string): string[]
 {
@@ -27,14 +29,19 @@ export function get_files(root_dir: string): string[]
 		else
 		{
 			// If it's a file, check its extension
-			const extension = path.extname(file);
-			if (extension === ".c" || extension === ".h") {
+			if (isFileSupported(file))
 				resulting_files.push(filePath);
-			}
 		}
 	}
 
-	return resulting_files;
+	return (resulting_files);
+}
+
+export	function isFileSupported(filePath : string) : boolean
+{
+	const extension = path.extname(filePath);
+
+	return (supportedFileTypes.includes(extension));
 }
 
 export function get_correct_date_format(date: Date):string
@@ -49,10 +56,11 @@ export function get_correct_date_format(date: Date):string
 	const minutes = String(date.getMinutes()).padStart(2, '0');
 	const seconds = String(date.getSeconds()).padStart(2, '0');
 
-	return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+	return (`${year}/${month}/${day} ${hours}:${minutes}:${seconds}`);
 }
 
 // Function to retrieve a configuration value
-export function getConfigValue(key: string): any {
-    return vscode.workspace.getConfiguration().get(key);
+export function getConfigValue(key: string): any
+{
+	return (vscode.workspace.getConfiguration().get(key));
 }

@@ -27,6 +27,7 @@ exports.place_header_in_single_file = exports.place_header_in_all_files = void 0
 const vscode = __importStar(require("vscode"));
 const utils = require('./utils');
 const placer = require('./place_header');
+const path = require('path');
 function place_header_in_all_files() {
     // Precondition, check if an workspace is open
     if (vscode.workspace.workspaceFolders == undefined)
@@ -46,16 +47,16 @@ exports.place_header_in_all_files = place_header_in_all_files;
 function place_header_in_single_file() {
     if (!check_settings())
         return (false);
-    vscode.window.showInformationMessage(`Current file:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`);
-    // const editor = vscode.window.activeTextEditor; // Get the active editor
-    // if (editor)
-    // {
-    // 	const filePath = editor.document.uri.fsPath; // Get the file path of the current file
-    // 	vscode.window.showInformationMessage(`Current file: ${filePath}`);
-    // } else
-    // {
-    // 	vscode.window.showInformationMessage('No file is currently open.');
-    // }
+    const activeEditor = vscode.window.activeTextEditor;
+    // Check if the function has been called on a text editor
+    if (!activeEditor)
+        return (false);
+    const fileName = activeEditor.document.fileName;
+    // Check if the file has a valid extension
+    if (!utils.isFileSupported(fileName))
+        return (false);
+    placer.place_header(fileName);
+    vscode.window.showInformationMessage(`42 Header has been placed in ${path.basename(fileName)}`);
     return (true);
 }
 exports.place_header_in_single_file = place_header_in_single_file;

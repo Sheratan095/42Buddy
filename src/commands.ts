@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 
 const utils = require('./utils')
 const placer = require('./place_header')
+const path = require('path');
 
 export function place_header_in_all_files() : boolean
 {
@@ -30,17 +31,22 @@ export function place_header_in_single_file() : boolean
 {
 	if (!check_settings())
 		return (false);
-
-	// const editor = vscode.window.activeTextEditor; // Get the active editor
-	// if (editor)
-	// {
-	// 	const filePath = editor.document.uri.fsPath; // Get the file path of the current file
-	// 	vscode.window.showInformationMessage(`Current file: ${filePath}`);
-	// } else
-	// {
-	// 	vscode.window.showInformationMessage('No file is currently open.');
-	// }
 	
+	const	activeEditor = vscode.window.activeTextEditor;
+
+	// Check if the function has been called on a text editor
+	if (!activeEditor)
+		return (false);
+
+	const	fileName = activeEditor.document.fileName;
+
+	// Check if the file has a valid extension
+	if (!utils.isFileSupported(fileName))
+		return (false);
+
+	placer.place_header(fileName);
+	vscode.window.showInformationMessage(`42 Header has been placed in ${path.basename(fileName)}`);
+
 	return (true);
 }
 
