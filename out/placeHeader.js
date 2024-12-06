@@ -23,23 +23,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.place_header = void 0;
+exports.placeHeader = void 0;
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
 const utils = require('./utils');
 const header_height = 11;
 const header_length = 81;
-function place_header(file) {
+function placeHeader(file) {
     // Get all lines
     let lines = fs.readFileSync(file, 'utf-8').split(/\r?\n/);
     // Establish if header already exists
-    // Header_exist() is required in two methods
+    // headerExist() is required in two methods
     // => i created a variable to avoid double calling an expensive method
-    let header_already_exist = header_exist(lines);
+    let header_already_exist = headerExist(lines);
     //Get new header
-    let new_lines = format_new_header(file, header_already_exist, lines);
+    let new_lines = formatNewHeader(file, header_already_exist, lines);
     //Get the lines to copy
-    let elements_to_copy = lines.slice(get_copy_starting_position(lines, header_already_exist));
+    let elements_to_copy = lines.slice(getCopyStartingPosition(lines, header_already_exist));
     //Conditionally insert the newline at the end of file
     if (lines[lines.length - 1] != "")
         elements_to_copy.push("");
@@ -47,9 +47,9 @@ function place_header(file) {
     fs.appendFileSync(file, new_lines.concat(elements_to_copy).join('\n'));
     return (file);
 }
-exports.place_header = place_header;
+exports.placeHeader = placeHeader;
 // Return the position where start to copy 
-function get_copy_starting_position(lines, header_already_exist) {
+function getCopyStartingPosition(lines, header_already_exist) {
     //Check if there's something else to write
     if (lines.length - (header_height) <= 0)
         return (header_height);
@@ -61,7 +61,7 @@ function get_copy_starting_position(lines, header_already_exist) {
     return (i);
 }
 // Check if in the file ther's already the header
-function header_exist(lines) {
+function headerExist(lines) {
     if (lines.length < header_height) {
         return false;
     }
@@ -77,7 +77,7 @@ function header_exist(lines) {
 }
 // Lines is used to get creation datetime in case of header already exists
 //	=> it prevent the need of reading file another time just to get the date
-function format_new_header(file_path, header_already_exist, lines) {
+function formatNewHeader(file_path, header_already_exist, lines) {
     let correct_creation_datetime;
     // Extract file info
     let info = fs.statSync(file_path);
@@ -123,4 +123,4 @@ function format_new_header(file_path, header_already_exist, lines) {
     header[11] = "";
     return (header);
 }
-//# sourceMappingURL=place_header.js.map
+//# sourceMappingURL=placeHeader.js.map

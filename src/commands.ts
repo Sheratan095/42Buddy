@@ -4,20 +4,20 @@ const utils = require('./utils')
 const placer = require('./place_header')
 const path = require('path');
 
-export function place_header_in_all_files() : boolean
+export function placeHeaderInAllFiles() : boolean
 {
 	// Precondition, check if an workspace is open
 	if (vscode.workspace.workspaceFolders == undefined)
 		return (vscode.window.showInformationMessage("Open a folder to execute this command"), false)
 
-	//Check if all configuration values are set
-	if (!check_settings())
+	// Check if all configuration values are set
+	if (!checkSettings())
 		return (false);
 
 	// We take as an assumption that just one folder is open in the workspace
 
 	let current_dir = vscode.workspace.workspaceFolders[0].uri.fsPath;
-	const files: string[] = utils.get_files(current_dir);
+	const files: string[] = utils.getFiles(current_dir);
 
 	for (let file of files)
 		placer.place_header(file);
@@ -27,9 +27,9 @@ export function place_header_in_all_files() : boolean
 	return (true);
 }
 
-export function place_header_in_single_file() : boolean
+export function placeHeaderInSingleFile() : boolean
 {
-	if (!check_settings())
+	if (!checkSettings())
 		return (false);
 	
 	const	activeEditor = vscode.window.activeTextEditor;
@@ -50,9 +50,9 @@ export function place_header_in_single_file() : boolean
 	return (true);
 }
 
-//If a value isn't set
+// if a value isn't set
 //	=> 'redirect' to the setting page
-function check_settings()
+function checkSettings()
 {
 	if (utils.getConfigValue("42Buddy.Email") == "" || utils.getConfigValue("42Buddy.Username") == "")
 	{

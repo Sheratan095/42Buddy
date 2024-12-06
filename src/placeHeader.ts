@@ -6,21 +6,21 @@ const utils = require('./utils')
 const header_height : number = 11;
 const header_length: number = 81;
 
-export function place_header(file:string) :string
+export function placeHeader(file:string) :string
 {
 	// Get all lines
 	let lines:string[] = fs.readFileSync(file, 'utf-8').split(/\r?\n/);
 
 	// Establish if header already exists
-	// Header_exist() is required in two methods
+	// headerExist() is required in two methods
 	// => i created a variable to avoid double calling an expensive method
-	let header_already_exist : boolean = header_exist(lines);
+	let header_already_exist : boolean = headerExist(lines);
 
 	//Get new header
-	let new_lines :string[] = format_new_header(file, header_already_exist, lines);
+	let new_lines :string[] = formatNewHeader(file, header_already_exist, lines);
 
 	//Get the lines to copy
-	let elements_to_copy:string[] = lines.slice(get_copy_starting_position(lines, header_already_exist));
+	let elements_to_copy:string[] = lines.slice(getCopyStartingPosition(lines, header_already_exist));
 
 	//Conditionally insert the newline at the end of file
 	if (lines[lines.length - 1] != "")
@@ -33,7 +33,7 @@ export function place_header(file:string) :string
 }
 
 // Return the position where start to copy 
-function get_copy_starting_position(lines:string[], header_already_exist:boolean) :number
+function getCopyStartingPosition(lines:string[], header_already_exist:boolean) :number
 {
 	//Check if there's something else to write
 	if (lines.length - (header_height) <= 0)
@@ -50,7 +50,7 @@ function get_copy_starting_position(lines:string[], header_already_exist:boolean
 }
 
 // Check if in the file ther's already the header
-function header_exist(lines: string[]): boolean
+function headerExist(lines: string[]): boolean
 {
 	if (lines.length < header_height) {
 		return false;
@@ -72,7 +72,7 @@ function header_exist(lines: string[]): boolean
 
 // Lines is used to get creation datetime in case of header already exists
 //	=> it prevent the need of reading file another time just to get the date
-function format_new_header(file_path: string, header_already_exist:boolean, lines:string[]): string[]
+function formatNewHeader(file_path: string, header_already_exist:boolean, lines:string[]): string[]
 {
 	let correct_creation_datetime : string;
 
@@ -90,7 +90,7 @@ function format_new_header(file_path: string, header_already_exist:boolean, line
 		correct_creation_datetime = lines[7].slice(14, 33);
 	}
 	else
-		correct_creation_datetime = utils.get_correct_date_format(info.mtime);
+		correct_creation_datetime = utils.getCorrectDateFormat(info.mtime);
 
 	// Removing all lines
 	fs.writeFileSync(file_path, '');
@@ -123,7 +123,7 @@ function format_new_header(file_path: string, header_already_exist:boolean, line
 	header[7] += ' '.repeat(padding) + "#+#    #+#             */";
 
 	// header[8] (Update)
-	header[8] = `/*   Updated: ${utils.get_correct_date_format(info.mtime)} by ${utils.getConfigValue("42Buddy.Username")}`;
+	header[8] = `/*   Updated: ${utils.getCorrectDateFormat(info.mtime)} by ${utils.getConfigValue("42Buddy.Username")}`;
 	padding = header_length - header[8].length - "###   ########.fr       */".length - 1;
 	header[8] += ' '.repeat(padding) + "###   ########.fr       */";
 

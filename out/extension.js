@@ -28,12 +28,12 @@ const vscode = __importStar(require("vscode"));
 //Musn't specify extension like this ('./header_placer.ts')
 const commands = require('./commands');
 function activate(context) {
-    let place_header_in_all_files = vscode.commands.registerCommand('42buddy.place_header_in_all_files', () => {
-        commands.place_header_in_all_files();
+    let placeHeaderInAllFiles = vscode.commands.registerCommand('42buddy.place_header_in_all_files', () => {
+        commands.placeHeaderInAllFiles();
     });
-    context.subscriptions.push(place_header_in_all_files);
+    context.subscriptions.push(placeHeaderInAllFiles);
     let place_header = vscode.commands.registerCommand('42buddy.place_header', () => {
-        commands.place_header_in_single_file();
+        commands.placeHeaderInSingleFile();
     });
     context.subscriptions.push(place_header);
 }

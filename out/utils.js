@@ -23,23 +23,24 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getConfigValue = exports.get_correct_date_format = exports.isFileSupported = exports.get_files = void 0;
+exports.getConfigValue = exports.getCorrectDateFormat = exports.isFileSupported = exports.getFiles = void 0;
 const vscode = __importStar(require("vscode"));
 const fs = require('fs');
 const path = require('path');
 const supportedFileTypes = [".c", ".h", ".cpp", ".hpp"];
-//Recursive searching of .c and .h files
-function get_files(root_dir) {
+// Recursive searching of .c and .h files
+function getFiles(root_dir) {
     const resulting_files = [];
     const readen_files = fs.readdirSync(root_dir);
     for (const file of readen_files) {
         const filePath = path.join(root_dir, file);
-        //Is a synchronous function call to retrieve the statistics of a file or directory specified by filePath
+        // Is a synchronous function call to retrieve the statistics of a file or directory specified by filePath
         const stats = fs.statSync(filePath);
         if (stats.isDirectory()) {
-            // If the file is a directory, recursively call search_files
-            const nestedFiles = get_files(filePath);
-            //The spread operator (...) is used to "spread" each element of the nestedFiles array into the resulting_files array individually.
+            // if the file is a directory
+            //	recursively call search_files
+            const nestedFiles = getFiles(filePath);
+            // The spread operator (...) is used to "spread" each element of the nestedFiles array into the resulting_files array individually.
             resulting_files.push(...nestedFiles);
         }
         else {
@@ -50,14 +51,14 @@ function get_files(root_dir) {
     }
     return (resulting_files);
 }
-exports.get_files = get_files;
+exports.getFiles = getFiles;
 function isFileSupported(filePath) {
     const extension = path.extname(filePath);
     return (supportedFileTypes.includes(extension));
 }
 exports.isFileSupported = isFileSupported;
-function get_correct_date_format(date) {
-    //String.padStart() is used to ensure that each component
+function getCorrectDateFormat(date) {
+    // String.padStart() is used to ensure that each component
     //	has at least two digits, padding with a leading zero if necessary
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Adding 1 to month because it's zero-based
@@ -67,7 +68,7 @@ function get_correct_date_format(date) {
     const seconds = String(date.getSeconds()).padStart(2, '0');
     return (`${year}/${month}/${day} ${hours}:${minutes}:${seconds}`);
 }
-exports.get_correct_date_format = get_correct_date_format;
+exports.getCorrectDateFormat = getCorrectDateFormat;
 // Function to retrieve a configuration value
 function getConfigValue(key) {
     return (vscode.workspace.getConfiguration().get(key));
