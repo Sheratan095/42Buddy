@@ -38,6 +38,9 @@ It can be activated by:
 - ctrl + shift + h : Inserts the header only in the currently open file
 - ctrl + h : Inserts the header recursively in all files within the first folder of the workspace.
 
+<br>
+
+
 ``` C
 /* ************************************************************************** */
 /*                                                                            */
