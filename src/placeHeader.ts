@@ -1,45 +1,45 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-const utils = require('./utils')
+const	utils = require('./utils')
 
-const header_height : number = 11;
-const header_length: number = 81;
+const	header_height : number = 11;
+const	header_length: number = 81;
 
-export function placeHeader(file:string) :string
+export function	placeHeader(file:string) :string
 {
 	// Get all lines
-	let lines:string[] = fs.readFileSync(file, 'utf-8').split(/\r?\n/);
+	let	lines:string[] = fs.readFileSync(file, 'utf-8').split(/\r?\n/);
 
 	// Establish if header already exists
 	// headerExist() is required in two methods
 	// => i created a variable to avoid double calling an expensive method
-	let header_already_exist : boolean = headerExist(lines);
+	let	header_already_exist : boolean = headerExist(lines);
 
-	//Get new header
-	let new_lines :string[] = formatNewHeader(file, header_already_exist, lines);
+	// Get new header
+	let	new_lines:string[] = formatNewHeader(file, header_already_exist, lines);
 
-	//Get the lines to copy
-	let elements_to_copy:string[] = lines.slice(getCopyStartingPosition(lines, header_already_exist));
+	// Get the lines to copy
+	let	elements_to_copy:string[] = lines.slice(getCopyStartingPosition(lines, header_already_exist));
 
-	//Conditionally insert the newline at the end of file
+	// Conditionally insert the newline at the end of file
 	if (lines[lines.length - 1] != "")
 		elements_to_copy.push("");
 
-	//Adding all the test to the file
+	// Adding all the test to the file
 	fs.appendFileSync(file, new_lines.concat(elements_to_copy).join('\n'));
 
 	return (file);
 }
 
 // Return the position where start to copy 
-function getCopyStartingPosition(lines:string[], header_already_exist:boolean) :number
+function	getCopyStartingPosition(lines:string[], header_already_exist:boolean) :number
 {
 	//Check if there's something else to write
 	if (lines.length - (header_height) <= 0)
 		return (header_height);
 
-	let i: number = (header_already_exist) ? header_height : 0;
+	let	i: number = (header_already_exist) ? header_height : 0;
 
 	// If there was already an empty line
 	//	=> skip it because it's placed by new header
@@ -50,7 +50,7 @@ function getCopyStartingPosition(lines:string[], header_already_exist:boolean) :
 }
 
 // Check if in the file ther's already the header
-function headerExist(lines: string[]): boolean
+function	headerExist(lines: string[]): boolean
 {
 	if (lines.length < header_height) {
 		return false;
@@ -63,24 +63,24 @@ function headerExist(lines: string[]): boolean
 		if (!(lines[i].startsWith("/*") && 
 			(lines[i].endsWith("*/") || lines[i].endsWith("*/\r"))))
 		{
-			return false;
+			return (false);
 		}
 	}
 
-	return true;
+	return (true);
 }
 
 // Lines is used to get creation datetime in case of header already exists
 //	=> it prevent the need of reading file another time just to get the date
-function formatNewHeader(file_path: string, header_already_exist:boolean, lines:string[]): string[]
+function	formatNewHeader(file_path: string, header_already_exist:boolean, lines:string[]): string[]
 {
-	let correct_creation_datetime : string;
+	let	correct_creation_datetime : string;
 
 	// Extract file info
-	let info = fs.statSync(file_path);
+	let	info = fs.statSync(file_path);
 
 	// +1 for the empty row after the header
-	let header: string[] = new Array<string>(header_height + 1);
+	let	header: string[] = new Array<string>(header_height + 1);
 
 	// If header already exist
 	//	=> get cretion date time form it
@@ -96,7 +96,7 @@ function formatNewHeader(file_path: string, header_already_exist:boolean, lines:
 	fs.writeFileSync(file_path, '');
 
 	// Variable reused to calculate padding of ' ' to write
-	let padding = 0;
+	let	padding = 0;
 
 	// HeaderBuilding
 	header[0] = "/* ************************************************************************** */";

@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getConfigValue = exports.getCorrectDateFormat = exports.isFileSupported = exports.getFiles = void 0;
+exports.checkSettings = exports.getConfigValue = exports.getCorrectDateFormat = exports.isFileSupported = exports.getFiles = void 0;
 const vscode = __importStar(require("vscode"));
 const fs = require('fs');
 const path = require('path');
@@ -74,4 +74,16 @@ function getConfigValue(key) {
     return (vscode.workspace.getConfiguration().get(key));
 }
 exports.getConfigValue = getConfigValue;
+// if a value isn't set
+//	=> 'redirect' to the setting page
+function checkSettings() {
+    if (getConfigValue("42Buddy.Email") == "" || getConfigValue("42Buddy.Username") == "") {
+        // Last '.' just to avoid appearing of other things that shouldn't appear
+        vscode.commands.executeCommand('workbench.action.openSettings', '42Buddy.');
+        vscode.window.showErrorMessage('This settings are required, plase fill all fields');
+        return (false);
+    }
+    return (true);
+}
+exports.checkSettings = checkSettings;
 //# sourceMappingURL=utils.js.map

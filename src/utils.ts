@@ -3,10 +3,10 @@ import * as vscode from 'vscode';
 const fs = require('fs');
 const path = require('path');
 
-const supportedFileTypes:string[] = [".c", ".h", ".cpp", ".hpp"];
+const	supportedFileTypes:string[] = [".c", ".h", ".cpp", ".hpp"];
 
 // Recursive searching of .c and .h files
-export function getFiles(root_dir: string): string[]
+export function	getFiles(root_dir: string): string[]
 {
 	const resulting_files: string[] = [];
 	const readen_files = fs.readdirSync(root_dir);
@@ -38,14 +38,14 @@ export function getFiles(root_dir: string): string[]
 	return (resulting_files);
 }
 
-export	function isFileSupported(filePath : string) : boolean
+export function	isFileSupported(filePath : string) : boolean
 {
 	const extension = path.extname(filePath);
 
 	return (supportedFileTypes.includes(extension));
 }
 
-export function getCorrectDateFormat(date: Date):string
+export function	getCorrectDateFormat(date: Date):string
 {
 	// String.padStart() is used to ensure that each component
 	//	has at least two digits, padding with a leading zero if necessary
@@ -61,7 +61,23 @@ export function getCorrectDateFormat(date: Date):string
 }
 
 // Function to retrieve a configuration value
-export function getConfigValue(key: string): any
+export function	getConfigValue(key: string): any
 {
 	return (vscode.workspace.getConfiguration().get(key));
+}
+
+// if a value isn't set
+//	=> 'redirect' to the setting page
+export function	checkSettings()
+{
+	if (getConfigValue("42Buddy.Email") == "" || getConfigValue("42Buddy.Username") == "")
+	{
+		// Last '.' just to avoid appearing of other things that shouldn't appear
+		vscode.commands.executeCommand('workbench.action.openSettings', '42Buddy.');
+
+		vscode.window.showErrorMessage('This settings are required, plase fill all fields');
+		return (false);
+	}
+
+	return (true);
 }

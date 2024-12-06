@@ -1,23 +1,23 @@
 import * as vscode from 'vscode';
 
-const utils = require('./utils')
-const placer = require('./place_header')
-const path = require('path');
+const	utils = require('./utils')
+const	placer = require('./place_header')
+const	path = require('path');
 
-export function placeHeaderInAllFiles() : boolean
+export function	placeHeaderInAllFiles() : boolean
 {
 	// Precondition, check if an workspace is open
 	if (vscode.workspace.workspaceFolders == undefined)
 		return (vscode.window.showInformationMessage("Open a folder to execute this command"), false)
 
 	// Check if all configuration values are set
-	if (!checkSettings())
+	if (!utils.checkSettings())
 		return (false);
 
 	// We take as an assumption that just one folder is open in the workspace
 
-	let current_dir = vscode.workspace.workspaceFolders[0].uri.fsPath;
-	const files: string[] = utils.getFiles(current_dir);
+	let		current_dir = vscode.workspace.workspaceFolders[0].uri.fsPath;
+	const	files: string[] = utils.getFiles(current_dir);
 
 	for (let file of files)
 		placer.place_header(file);
@@ -27,9 +27,9 @@ export function placeHeaderInAllFiles() : boolean
 	return (true);
 }
 
-export function placeHeaderInSingleFile() : boolean
+export function	placeHeaderInSingleFile() : boolean
 {
-	if (!checkSettings())
+	if (!utils.checkSettings())
 		return (false);
 	
 	const	activeEditor = vscode.window.activeTextEditor;
@@ -46,22 +46,6 @@ export function placeHeaderInSingleFile() : boolean
 
 	placer.place_header(fileName);
 	vscode.window.showInformationMessage(`42 Header has been placed in ${path.basename(fileName)}`);
-
-	return (true);
-}
-
-// if a value isn't set
-//	=> 'redirect' to the setting page
-function checkSettings()
-{
-	if (utils.getConfigValue("42Buddy.Email") == "" || utils.getConfigValue("42Buddy.Username") == "")
-	{
-		// Last '.' just to avoid appearing of other things that shouldn't appear
-		vscode.commands.executeCommand('workbench.action.openSettings', '42Buddy.');
-
-		vscode.window.showErrorMessage('This settings are required, plase fill all fields');
-		return (false);
-	}
 
 	return (true);
 }

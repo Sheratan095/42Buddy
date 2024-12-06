@@ -36,14 +36,14 @@ function placeHeader(file) {
     // headerExist() is required in two methods
     // => i created a variable to avoid double calling an expensive method
     let header_already_exist = headerExist(lines);
-    //Get new header
+    // Get new header
     let new_lines = formatNewHeader(file, header_already_exist, lines);
-    //Get the lines to copy
+    // Get the lines to copy
     let elements_to_copy = lines.slice(getCopyStartingPosition(lines, header_already_exist));
-    //Conditionally insert the newline at the end of file
+    // Conditionally insert the newline at the end of file
     if (lines[lines.length - 1] != "")
         elements_to_copy.push("");
-    //Adding all the test to the file
+    // Adding all the test to the file
     fs.appendFileSync(file, new_lines.concat(elements_to_copy).join('\n'));
     return (file);
 }
@@ -70,10 +70,10 @@ function headerExist(lines) {
         //	and in window with \n (char that's used to split lines during file reading)
         if (!(lines[i].startsWith("/*") &&
             (lines[i].endsWith("*/") || lines[i].endsWith("*/\r")))) {
-            return false;
+            return (false);
         }
     }
-    return true;
+    return (true);
 }
 // Lines is used to get creation datetime in case of header already exists
 //	=> it prevent the need of reading file another time just to get the date

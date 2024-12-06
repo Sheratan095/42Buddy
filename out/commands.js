@@ -33,7 +33,7 @@ function placeHeaderInAllFiles() {
     if (vscode.workspace.workspaceFolders == undefined)
         return (vscode.window.showInformationMessage("Open a folder to execute this command"), false);
     // Check if all configuration values are set
-    if (!checkSettings())
+    if (!utils.checkSettings())
         return (false);
     // We take as an assumption that just one folder is open in the workspace
     let current_dir = vscode.workspace.workspaceFolders[0].uri.fsPath;
@@ -45,7 +45,7 @@ function placeHeaderInAllFiles() {
 }
 exports.placeHeaderInAllFiles = placeHeaderInAllFiles;
 function placeHeaderInSingleFile() {
-    if (!checkSettings())
+    if (!utils.checkSettings())
         return (false);
     const activeEditor = vscode.window.activeTextEditor;
     // Check if the function has been called on a text editor
@@ -60,15 +60,4 @@ function placeHeaderInSingleFile() {
     return (true);
 }
 exports.placeHeaderInSingleFile = placeHeaderInSingleFile;
-// if a value isn't set
-//	=> 'redirect' to the setting page
-function checkSettings() {
-    if (utils.getConfigValue("42Buddy.Email") == "" || utils.getConfigValue("42Buddy.Username") == "") {
-        // Last '.' just to avoid appearing of other things that shouldn't appear
-        vscode.commands.executeCommand('workbench.action.openSettings', '42Buddy.');
-        vscode.window.showErrorMessage('This settings are required, plase fill all fields');
-        return (false);
-    }
-    return (true);
-}
 //# sourceMappingURL=commands.js.map
