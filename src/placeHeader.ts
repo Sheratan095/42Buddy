@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-const	utils = require('./utils')
+const	utils = require('./utils');
 
 const	header_height : number = 11;
 const	header_length: number = 81;
@@ -35,7 +35,7 @@ export function	placeHeader(file:string) :string
 // Return the position where start to copy 
 function	getCopyStartingPosition(lines:string[], header_already_exist:boolean) :number
 {
-	//Check if there's something else to write
+	// Check if there's something else to write
 	if (lines.length - (header_height) <= 0)
 		return (header_height);
 
@@ -58,7 +58,7 @@ function	headerExist(lines: string[]): boolean
 
 	for (let i = 0; i < header_height; i++)
 	{
-		//Second condition in end of line because in linux vscode all the lines end with \r
+		// Second condition in end of line because in linux vscode all the lines end with \r
 		//	and in window with \n (char that's used to split lines during file reading)
 		if (!(lines[i].startsWith("/*") && 
 			(lines[i].endsWith("*/") || lines[i].endsWith("*/\r"))))

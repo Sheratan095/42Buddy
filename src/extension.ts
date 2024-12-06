@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
-//Musn't specify extension like this ('./header_placer.ts')
-const	commands = require('./commands')
+// Musn't specify extension like this ('./commands.ts')
+const	commands = require('./commands');
 
 export function	activate(context: vscode.ExtensionContext)
 {

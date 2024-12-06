@@ -40,7 +40,7 @@ export function	getFiles(root_dir: string): string[]
 
 export function	isFileSupported(filePath : string) : boolean
 {
-	const extension = path.extname(filePath);
+	const	extension = path.extname(filePath);
 
 	return (supportedFileTypes.includes(extension));
 }
