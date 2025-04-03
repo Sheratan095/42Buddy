@@ -27,3 +27,5 @@
 [] Add the icon of extension in the lower bar, on click it open a menù that contains all avaible commands of 42Buddy, it would improve the concept of buddy
 
 [] Be able to add more file extension where to place 42 header
+	=> the best optio should be to have a list of extension with some default options
+		and the capability to add a custom extension to that list
