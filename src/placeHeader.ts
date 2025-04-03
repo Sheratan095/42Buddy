@@ -33,10 +33,13 @@ export function	placeHeader(file:string) :string
 }
 
 // Return the position where start to copy 
+// 	=> start of the file if header doesn't exist
+//	=> start of the first line after the header if it exists (skipping the empty line)
 function	getCopyStartingPosition(lines:string[], header_already_exist:boolean) :number
 {
-	// Check if there's something else to write
-	if (lines.length - (header_height) <= 0)
+	// If header already exist && there are no lines to copy
+	//	=> return the header height to skip it
+	if (lines.length - (header_height) <= 0 && header_already_exist)
 		return (header_height);
 
 	let	i: number = (header_already_exist) ? header_height : 0;

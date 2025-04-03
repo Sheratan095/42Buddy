@@ -8,7 +8,7 @@
 
 [] Flag to active and deactive inserting header in cpp and hpp files
 
-[] Empty the file when it contains this:
+[x] Empty the file when it contains this:
 {
 	#ifndef C_HPP
 	#define C_HPP
