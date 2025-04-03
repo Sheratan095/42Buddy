@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.placeHeaderInSingleFile = exports.placeHeaderInAllFiles = void 0;
 const vscode = __importStar(require("vscode"));
 const utils = require('./utils');
-const placer = require('./place_header');
+const placer = require('./placeHeader');
 const path = require('path');
 function placeHeaderInAllFiles() {
     // Precondition, check if an workspace is open
@@ -39,7 +39,7 @@ function placeHeaderInAllFiles() {
     let current_dir = vscode.workspace.workspaceFolders[0].uri.fsPath;
     const files = utils.getFiles(current_dir);
     for (let file of files)
-        placer.place_header(file);
+        placer.placeHeader(file);
     vscode.window.showInformationMessage("42 Header has been placed");
     return (true);
 }
@@ -55,7 +55,7 @@ function placeHeaderInSingleFile() {
     // Check if the file has a valid extension
     if (!utils.isFileSupported(fileName))
         return (false);
-    placer.place_header(fileName);
+    placer.placeHeader(fileName);
     vscode.window.showInformationMessage(`42 Header has been placed in ${path.basename(fileName)}`);
     return (true);
 }

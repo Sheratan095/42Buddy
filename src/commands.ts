@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 const	utils = require('./utils');
-const	placer = require('./place_header');
+const	placer = require('./placeHeader');
 const	path = require('path');
 
 export function	placeHeaderInAllFiles() : boolean
@@ -20,7 +20,7 @@ export function	placeHeaderInAllFiles() : boolean
 	const	files: string[] = utils.getFiles(current_dir);
 
 	for (let file of files)
-		placer.place_header(file);
+		placer.placeHeader(file);
 
 	vscode.window.showInformationMessage("42 Header has been placed");
 	
@@ -44,7 +44,7 @@ export function	placeHeaderInSingleFile() : boolean
 	if (!utils.isFileSupported(fileName))
 		return (false);
 
-	placer.place_header(fileName);
+	placer.placeHeader(fileName);
 	vscode.window.showInformationMessage(`42 Header has been placed in ${path.basename(fileName)}`);
 
 	return (true);
