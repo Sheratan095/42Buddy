@@ -34,6 +34,8 @@ All the features are under _42Buddy_ category
 
 This feature inserts a 42 header in .c, .h, .cpp, and .hpp files.
 
+You can chose to don't place 42 header in .cpp and .hpp files from the settings
+
 It can be activated by:
 - ctrl + shift + h : Inserts the header only in the currently open file
 - ctrl + h : Inserts the header recursively in all files within the first folder of the workspace.

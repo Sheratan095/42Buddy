@@ -6,7 +6,7 @@
 
 [] Count line in a function
 
-[] Flag to active and deactive inserting header in cpp and hpp files
+[X] Flag to active and deactive inserting header in cpp and hpp files
 
 [x] Empty the file when it contains this:
 {

@@ -3,7 +3,8 @@ import * as vscode from 'vscode';
 const fs = require('fs');
 const path = require('path');
 
-const	supportedFileTypes:string[] = [".c", ".h", ".cpp", ".hpp"];
+const	cTypes:string[] = [".c", ".h"];
+const	cppTypes:string[] = [".cpp", ".hpp"];
 
 // Recursive searching of .c and .h files
 export function	getFiles(root_dir: string): string[]
@@ -42,7 +43,15 @@ export function	isFileSupported(filePath : string) : boolean
 {
 	const	extension = path.extname(filePath);
 
-	return (supportedFileTypes.includes(extension));
+	if (cTypes.includes(extension))
+		return (true);
+
+
+	if (getConfigValue("42Buddy.Cpp") == true)
+		if (cppTypes.includes(extension))
+			return (true);
+
+	return (false);
 }
 
 export function	getCorrectDateFormat(date: Date):string
