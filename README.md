@@ -32,14 +32,15 @@ All the features are under _42Buddy_ category
 
 ### Header placer
 
-This feature insert 42 header in .c, .h, .cpp and .hpp files
+This feature inserts a 42 header in .c, .h, .cpp, and .hpp files.
 
 It can be activated by:
 - ctrl + shift + h : Inserts the header only in the currently open file
 - ctrl + h : Inserts the header recursively in all files within the first folder of the workspace.
 
-<br>
+**Note:** The `Updated` timestamp in the header reflects the time when the header was last placed and not when the code has been modified last time.
 
+<br>
 
 ``` C
 /* ************************************************************************** */
@@ -54,6 +55,8 @@ It can be activated by:
 /*                                                                            */
 /* ************************************************************************** */
 ```
+
+
 
 <br>
 

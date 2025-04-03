@@ -22,4 +22,4 @@
 	#endif
 }
 
-[] To be more efficent, check if the last change date of the file is the same as in the header, if so, don't do anithing 
+[x] To be more efficent, check if the last change date of the file is the same as in the header, if so, don't do anithing 

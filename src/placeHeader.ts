@@ -8,6 +8,9 @@ const	header_length: number = 81;
 
 export function	placeHeader(file:string) :string
 {
+	// Extract file info
+	let	info = fs.statSync(file);
+
 	// Get all lines
 	let	lines:string[] = fs.readFileSync(file, 'utf-8').split(/\r?\n/);
 
@@ -16,8 +19,21 @@ export function	placeHeader(file:string) :string
 	// => i created a variable to avoid double calling an expensive method
 	let	header_already_exist : boolean = headerExist(lines);
 
+	// If header already exist
+	//	if the last change time in header is older than the actual last change time
+	//	=> update the header
+	//	=> else, do nothing
+	if (header_already_exist)
+	{
+		let	header_last_change_time: String = lines[8].slice(14, 33);
+		let	file_last_change_time: String = utils.getCorrectDateFormat(info.mtime);
+
+		if (header_last_change_time == file_last_change_time)
+			return (file);
+	}
+
 	// Get new header
-	let	new_lines:string[] = formatNewHeader(file, header_already_exist, lines);
+	let	new_lines:string[] = formatNewHeader(file, header_already_exist, lines, info);
 
 	// Get the lines to copy
 	let	elements_to_copy:string[] = lines.slice(getCopyStartingPosition(lines, header_already_exist));
@@ -75,12 +91,9 @@ function	headerExist(lines: string[]): boolean
 
 // Lines is used to get creation datetime in case of header already exists
 //	=> it prevent the need of reading file another time just to get the date
-function	formatNewHeader(file_path: string, header_already_exist:boolean, lines:string[]): string[]
+function	formatNewHeader(file_path: string, header_already_exist:boolean, lines:string[], info: fs.Stats): string[]
 {
 	let	correct_creation_datetime : string;
-
-	// Extract file info
-	let	info = fs.statSync(file_path);
 
 	// +1 for the empty row after the header
 	let	header: string[] = new Array<string>(header_height + 1);
@@ -126,7 +139,7 @@ function	formatNewHeader(file_path: string, header_already_exist:boolean, lines:
 	header[7] += ' '.repeat(padding) + "#+#    #+#             */";
 
 	// header[8] (Update)
-	header[8] = `/*   Updated: ${utils.getCorrectDateFormat(info.mtime)} by ${utils.getConfigValue("42Buddy.Username")}`;
+	header[8] = `/*   Updated: ${utils.getCorrectDateFormat(new Date())} by ${utils.getConfigValue("42Buddy.Username")}`;
 	padding = header_length - header[8].length - "###   ########.fr       */".length - 1;
 	header[8] += ' '.repeat(padding) + "###   ########.fr       */";
 
