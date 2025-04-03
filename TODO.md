@@ -30,3 +30,5 @@
 [] Be able to add more file extension where to place 42 header
 	=> the best optio should be to have a list of extension with some default options
 		and the capability to add a custom extension to that list
+
+[] Modify features and last updates in manifetst?
