@@ -2,7 +2,8 @@
 
 [X] Possibility to place header also just in the current file with another shortcut
 
-[] Display newline, tab, spaces and so forth
+[] Display newline, tab, spaces and so forth (render whitespaces)
+	=> instead of creating a new properties should be better to place a reference in the future "menù" in the lower bar
 
 [] Count line in a function
 
