@@ -18,6 +18,27 @@
 	"activationEvents": [],
 	"main": "./out/extension.js",
 	"contributes": {
+
+		"viewsContainers": {
+			"activitybar": [
+				{
+				"id": "42Buddy",
+				"title": "42Buddy",
+				"icon": "Imgs/robot-dog.png"
+				}
+			]
+			},
+
+			"views": {
+				"42Buddy": [
+					{
+						"id": "42Buddy",
+						"name": "42Buddy",
+						"icon": "Imgs/robot-dog.png"
+					}
+				]
+		},
+
 		"configuration": {
 			"properties": {
 				"42Buddy.Username": {
@@ -35,6 +56,7 @@
 				}
 			}
 		},
+
 		"keybindings": [
 			{
 				"command": "42buddy.place_header",
@@ -48,6 +70,7 @@
 				"mac": "cmd+h"
 			}
 		],
+
 		"commands": [
 			{
 				"command": "42buddy.place_header",
@@ -60,6 +83,7 @@
 				"category": "42Buddy"
 			}
 		]
+
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
