@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const	cTypes:string[] = [".c", ".h"];
-const	cppTypes:string[] = [".cpp", ".hpp"];
+const	cppTypes:string[] = [".cpp", ".hpp", ".tpp"];
 
 // Recursive searching of .c and .h files
 export function	getFiles(root_dir: string): string[]
