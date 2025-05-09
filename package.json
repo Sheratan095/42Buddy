@@ -8,7 +8,7 @@
 	"displayName": "42Buddy",
 	"icon": "./Imgs/robot-dog.png",
 	"publisher": "Sheratan",
-	"version": "2.2.2",
+	"version": "2.2.3",
 	"engines": {
 		"vscode": "^1.87.0"
 	},
