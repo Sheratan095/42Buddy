@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 
 // export allows to use this class in other files
-export class SidebarViewProvider implements vscode.WebviewViewProvider
+export class FirstViewProvider implements vscode.WebviewViewProvider
 {
 	constructor(private readonly context: vscode.ExtensionContext) {}
 

@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
 
-export class SecondaryViewProvider implements vscode.WebviewViewProvider
+export class SecondViewProvider implements vscode.WebviewViewProvider
 {
 	constructor(private readonly context: vscode.ExtensionContext) {}
 

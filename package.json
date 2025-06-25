@@ -31,14 +31,14 @@
 			"42Buddy": [
 				{
 					"type": "webview",
-					"id": "primarySideBar",
-					"name": "Stuff",
+					"id": "commandsView",
+					"name": "Commands",
 					"icon": "Imgs/robot-dog.png"
 				},
 				{
 					"type": "webview",
-					"id": "sheratanView2",
-					"name": "42Buddy – Actions",
+					"id": "configurationView",
+					"name": "Configurations",
 					"icon": "Imgs/robot-dog.png"
 				}
 			]

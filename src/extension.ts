@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { SidebarViewProvider } from './sidebarProvider';
-import { SecondaryViewProvider } from './secondaryViewProvider';
+import { FirstViewProvider } from './viewsProvieder/primarySidebar/firstViewProvider';
+import { SecondViewProvider } from './viewsProvieder/primarySidebar/secondViewProvider';
 
 // Musn't specify extension like this ('./commands.ts')
 const	commands = require('./commands');
@@ -17,14 +17,14 @@ export function	activate(context: vscode.ExtensionContext)
 	});
 	context.subscriptions.push(place_header);
 
-	// Register the primary sidebar view (with tabs)
+	// Register the first sidebar view for commands
 	context.subscriptions.push(
-		vscode.window.registerWebviewViewProvider('primarySideBar', new SidebarViewProvider(context))
+		vscode.window.registerWebviewViewProvider('commandsView', new FirstViewProvider(context))
 	);
 
-	// Register the secondary view for actions
+	// Register the second view for actions
 	context.subscriptions.push(
-		vscode.window.registerWebviewViewProvider('sheratanView2', new SecondaryViewProvider(context))
+		vscode.window.registerWebviewViewProvider('configurationView', new SecondViewProvider(context))
 	);
 }
 
