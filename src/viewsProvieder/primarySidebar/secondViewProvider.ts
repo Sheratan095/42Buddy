@@ -32,89 +32,14 @@ export class SecondViewProvider implements vscode.WebviewViewProvider
 
 	getHtml(webview: vscode.Webview): string
 	{
-		return `
-		<!DOCTYPE html>
-		<html lang="en">
-		<head>
-			<meta charset="UTF-8">
-			<meta name="color-scheme" content="light dark">
-			<style>
-				body {
-					background-color:rgb(245, 0, 0);
-					color: white;
-					margin: 0;
-					padding: 10px;
-					font-family: sans-serif;
-				}
-				
-				.action-button {
-					background-color: #0078d4;
-					color: white;
-					padding: 10px 15px;
-					border: none;
-					border-radius: 4px;
-					cursor: pointer;
-					margin: 5px 0;
-					width: 100%;
-					text-align: left;
-					font-size: 14px;
-				}
-				
-				.action-button:hover {
-					background-color: #106ebe;
-				}
-				
-				.action-section {
-					margin: 15px 0;
-				}
-				
-				.action-section h4 {
-					color: #cccccc;
-					margin-bottom: 10px;
-					border-bottom: 1px solid #3c3c3c;
-					padding-bottom: 5px;
-				}
-			</style>
-		</head>
-		<body>
-			<h3>42Buddy Actions</h3>
-			
-			<div class="action-section">
-				<h4>Quick Actions</h4>
-				<button class="action-button" onclick="sendCommand('openTerminal')">
-					📁 Open Terminal
-				</button>
-				<button class="action-button" onclick="sendCommand('openFile')">
-					📄 Open File
-				</button>
-				<button class="action-button" onclick="sendCommand('showCommands')">
-					⚡ Show Commands
-				</button>
-			</div>
-			
-			<div class="action-section">
-				<h4>42 School Tools</h4>
-				<button class="action-button" onclick="alert('Feature coming soon!')">
-					🏫 Check Intra Profile
-				</button>
-				<button class="action-button" onclick="alert('Feature coming soon!')">
-					📊 Project Status
-				</button>
-				<button class="action-button" onclick="alert('Feature coming soon!')">
-					🎯 Peer Evaluation Helper
-				</button>
-			</div>
+		const	htmlPath = path.join(this.context.extensionPath, 'views', 'primarySidebar/secondView/index.html');
+		const	cssPath = path.join(this.context.extensionPath, 'views', 'primarySidebar/secondView/style.css');
 
-			<script>
-				const vscode = acquireVsCodeApi();
+		let		html = fs.readFileSync(htmlPath, 'utf8');
+		const	cssUri = webview.asWebviewUri(vscode.Uri.file(cssPath));
+		
+		html = html.replace('{{CSS_URI}}', cssUri.toString());
 
-				function sendCommand(command) {
-					vscode.postMessage({ command: command });
-				}
-			</script>
-
-		</body>
-		</html>
-		`;
+		return (html);
 	}
 }
