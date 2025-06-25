@@ -1,4 +1,6 @@
 import * as vscode from 'vscode';
+import * as path from 'path';
+import * as fs from 'fs';
 
 // export allows to use this class in other files
 export class SidebarViewProvider implements vscode.WebviewViewProvider
@@ -11,7 +13,7 @@ export class SidebarViewProvider implements vscode.WebviewViewProvider
 
 	webviewView.webview.html = this.getHtml(webviewView.webview);
 
-	// Listen for message from webview
+	// This listens for messages that are sent from your Webview (HTML/JavaScript) to your extension's backend, and reacts to them
 	webviewView.webview.onDidReceiveMessage(message =>
 	{
 		if (message.command === 'sayHello')
@@ -19,44 +21,13 @@ export class SidebarViewProvider implements vscode.WebviewViewProvider
 	});
   }
 
-	getHtml(webview: vscode.Webview): string {
-	return `
-		<html>
-		<head>
-			<style>
-			body {
-				color: white;
-				margin: 0;
-				padding: 10px;
-				font-family: sans-serif;
-			}
+	getHtml(webview: vscode.Webview): string
+	{
+		const	htmlPath = path.join(this.context.extensionPath, 'views', 'primarySidebar/index.html');
+		console.log(`htmlPath: ${htmlPath}`);
 
-			button {
-				background-color: #007acc;
-				color: white;
-				padding: 8px 12px;
-				border: none;
-				border-radius: 4px;
-				cursor: pointer;
-			}
+		let		html = fs.readFileSync(htmlPath, 'utf8');
 
-			button:hover {
-				background-color: #005fa3;
-			}
-			</style>
-		</head>
-		<body>
-			<h3>42Buddy</h3>
-			<button onclick="sendHello()">Say Hello</button>
-
-			<script>
-			const vscode = acquireVsCodeApi();
-			function sendHello() {
-				vscode.postMessage({ command: 'sayHello' });
-			}
-			</script>
-		</body>
-		</html>
-	`;
-  }
+		return (html);
+	}
 }

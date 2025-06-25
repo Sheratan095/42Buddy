@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+  <h3>42Buddy</h3>
+  <button onclick="sendHello()">Say Hello</button>
+
+  <script>
+    const vscode = acquireVsCodeApi();
+    function sendHello() {
+      vscode.postMessage({ command: 'sayHello' });
+    }
+  </script>
+</body>
+</html>
