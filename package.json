@@ -30,8 +30,9 @@
 		"views": {
 			"42Buddy": [
 				{
-					"id": "42Buddy",
-					"name": "42Buddy",
+					"type": "webview",
+					"id": "primarySideBar",
+					"name": "",
 					"icon": "Imgs/robot-dog.png"
 				}
 			]

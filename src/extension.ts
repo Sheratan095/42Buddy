@@ -1,4 +1,6 @@
 import * as vscode from 'vscode';
+import { SidebarViewProvider } from './sidebarProvider';
+
 
 // Musn't specify extension like this ('./commands.ts')
 const	commands = require('./commands');
@@ -16,4 +18,10 @@ export function	activate(context: vscode.ExtensionContext)
 	});
 	context.subscriptions.push(place_header);
 
+
+	context.subscriptions.push(
+		vscode.window.registerWebviewViewProvider('primarySideBar', new SidebarViewProvider(context))
+	);
+
 }
+
