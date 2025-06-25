@@ -1,99 +1,35 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="color-scheme" content="light dark">
-	<link href="styles.css" rel="stylesheet">
+
+	<link href="{{CSS_URI}}" rel="stylesheet">
 </head>
+
 <body>
-	<h3>42Buddy</h3>
 
-	<!-- Tab Navigation -->
-	<div class="tab-container">
-		<button class="tab-button active" onclick="showTab('header-section')">Header Tools</button>
-		<button class="tab-button" onclick="showTab('utils-section')">Utilities</button>
-		<button class="tab-button" onclick="showTab('settings-section')">Settings</button>
-	</div>
+	<div class="commands-container">
 
-	<!-- Section 1: Header Tools -->
-	<div id="header-section" class="section active">
-		<h4>Header Management</h4>
-		<button onclick="sendCommand('executeInserHeader')">Place Header in All Files</button>
-		<button onclick="sendCommand('place_header')">Place Header in Current File</button>
-		<p>Manage 42 school headers in your project files.</p>
-	</div>
-
-	<!-- Section 2: Utilities -->
-	<div id="utils-section" class="section">
-		<h4>Project Utilities</h4>
-		<button onclick="sendCommand('format_code')">Format Code</button>
-		<button onclick="sendCommand('check_norminette')">Check Norminette</button>
-		<p>Additional tools for 42 projects.</p>
-	</div>
-
-	<!-- Section 3: Settings -->
-	<div id="settings-section" class="section">
-		<h4>Extension Settings</h4>
-		<div class="setting-item">
-			<label for="username">Username:</label>
-			<input type="text" id="username" placeholder="Enter your 42 username">
-		</div>
-		<div class="setting-item">
-			<label for="email">Email:</label>
-			<input type="email" id="email" placeholder="Enter your email">
-		</div>
-		<button onclick="saveSettings()">Save Settings</button>
+		<button class="command-button" onclick="sendCommand('place_header_in_all_files')">
+			Place header in all files
+		</button>
+		
+		<button class="command-button" onclick="sendCommand('place_header')">
+			Place header in current file
+		</button>
 	</div>
 
 	<script>
 		const vscode = acquireVsCodeApi();
 
-		// Tab switching functionality
-		function showTab(sectionId) {
-			// Hide all sections
-			const sections = document.querySelectorAll('.section');
-			sections.forEach(section => section.classList.remove('active'));
-			
-			// Remove active class from all tabs
-			const tabs = document.querySelectorAll('.tab-button');
-			tabs.forEach(tab => tab.classList.remove('active'));
-			
-			// Show selected section
-			document.getElementById(sectionId).classList.add('active');
-			
-			// Add active class to clicked tab
-			event.target.classList.add('active');
-		}
-
-		// Generic command sender
-		function sendCommand(command) {
+		// Send command to extension
+		function sendCommand(command)
+		{
 			vscode.postMessage({ command: command });
 		}
-
-		// Save settings function
-		function saveSettings() {
-			const username = document.getElementById('username').value;
-			const email = document.getElementById('email').value;
-			
-			vscode.postMessage({ 
-				command: 'saveSettings',
-				data: { username, email }
-			});
-		}
-
-		// Load saved settings when view loads
-		window.addEventListener('load', () => {
-			vscode.postMessage({ command: 'loadSettings' });
-		});
-
-		// Listen for messages from extension
-		window.addEventListener('message', event => {
-			const message = event.data;
-			if (message.command === 'loadedSettings') {
-				document.getElementById('username').value = message.data.username || '';
-				document.getElementById('email').value = message.data.email || '';
-			}
-		});
 	</script>
 
 </body>

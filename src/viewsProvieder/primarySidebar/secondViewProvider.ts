@@ -40,7 +40,7 @@ export class SecondViewProvider implements vscode.WebviewViewProvider
 			<meta name="color-scheme" content="light dark">
 			<style>
 				body {
-					background-color: #1e1e1e;
+					background-color:rgb(245, 0, 0);
 					color: white;
 					margin: 0;
 					padding: 10px;
