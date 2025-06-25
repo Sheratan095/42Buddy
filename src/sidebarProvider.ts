@@ -16,8 +16,8 @@ export class SidebarViewProvider implements vscode.WebviewViewProvider
 	// This listens for messages that are sent from your Webview (HTML/JavaScript) to your extension's backend, and reacts to them
 	webviewView.webview.onDidReceiveMessage(message =>
 	{
-		if (message.command === 'sayHello')
-			vscode.commands.executeCommand('sheratan.sayHello');
+		if (message.command === 'executeInserHeader')
+			vscode.commands.executeCommand('42buddy.place_header_in_all_files');
 	});
   }
 
