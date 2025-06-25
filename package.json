@@ -32,7 +32,13 @@
 				{
 					"type": "webview",
 					"id": "primarySideBar",
-					"name": "",
+					"name": "Stuff",
+					"icon": "Imgs/robot-dog.png"
+				},
+				{
+					"type": "webview",
+					"id": "sheratanView2",
+					"name": "42Buddy – Actions",
 					"icon": "Imgs/robot-dog.png"
 				}
 			]

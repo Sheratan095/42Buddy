@@ -6,15 +6,97 @@ body {
   font-family: sans-serif;
 }
 
-button {
+/* Tab Container */
+.tab-container {
+  display: flex;
+  border-bottom: 1px solid #3c3c3c;
+  margin-bottom: 15px;
+}
+
+.tab-button {
+  background-color: transparent;
+  color: #cccccc;
+  padding: 8px 12px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex: 1;
+  text-align: center;
+}
+
+.tab-button:hover {
+  background-color: #2d2d30;
+  color: white;
+}
+
+.tab-button.active {
+  color: #007acc;
+  border-bottom-color: #007acc;
+  background-color: #2d2d30;
+}
+
+/* Sections */
+.section {
+  display: none;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.section.active {
+  display: block;
+}
+
+.section h4 {
+  margin-top: 0;
+  color: #cccccc;
+  border-bottom: 1px solid #3c3c3c;
+  padding-bottom: 5px;
+}
+
+/* Regular buttons */
+button:not(.tab-button) {
   background-color: #007acc;
   color: white;
   padding: 8px 12px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin: 5px 5px 5px 0;
+  transition: background-color 0.2s;
 }
 
-button:hover {
+button:not(.tab-button):hover {
   background-color: #005fa3;
+}
+
+/* Settings section styles */
+.setting-item {
+  margin: 10px 0;
+}
+
+.setting-item label {
+  display: block;
+  margin-bottom: 5px;
+  color: #cccccc;
+}
+
+.setting-item input {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #3c3c3c;
+  border-radius: 3px;
+  background-color: #2d2d30;
+  color: white;
+  box-sizing: border-box;
+}
+
+.setting-item input:focus {
+  outline: none;
+  border-color: #007acc;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
