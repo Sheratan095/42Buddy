@@ -9,7 +9,30 @@
 </head>
 
 <body>
-	<h1>Secpond</h1>
+	<div class="flags-container">
+		<div class="flag-item" onclick="toggleCheckbox('c-files')">
+			<input type="checkbox" id="c-files" class="flag-checkbox">
+			<label for="c-files" class="flag-label">C Files (.c, .h)</label>
+		</div>
+		
+		<div class="flag-item" onclick="toggleCheckbox('cpp-files')">
+			<input type="checkbox" id="cpp-files" class="flag-checkbox">
+			<label for="cpp-files" class="flag-label">C++ Files (.cpp, .hpp)</label>
+		</div>
+		
+		<div class="flag-item" onclick="toggleCheckbox('makefile')">
+			<input type="checkbox" id="makefile" class="flag-checkbox">
+			<label for="makefile" class="flag-label">Makefile</label>
+		</div>
+	</div>
+
+	<script>
+		function toggleCheckbox(checkboxId)
+		{
+			const	checkbox = document.getElementById(checkboxId);
+			checkbox.checked = !checkbox.checked;
+		}
+	</script>
 </body>
 
 </html>

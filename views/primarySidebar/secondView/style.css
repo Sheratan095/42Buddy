@@ -1,0 +1,38 @@
+body {
+	margin: 0;
+	padding: 15px;
+	font-family: sans-serif;
+	color: #fff;
+}
+
+.flags-container {
+	display: flex;
+	flex-direction: column;
+	gap: 0px;
+}
+
+.flag-item {
+	border: 1px solid #fff;
+	background-color: transparent;
+	border-radius: 4px;
+	margin: 5%;
+	padding: 10px;
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.flag-item:hover {
+	border-color: #0264af;
+}
+
+.flag-checkbox {
+	margin-right: 8px;
+}
+
+.flag-label {
+	color: #fff;
+	cursor: pointer;
+	user-select: none;
+}
