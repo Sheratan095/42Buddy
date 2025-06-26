@@ -8,6 +8,9 @@ const	cTypes:string[] = [".c", ".h"];
 const	cppTypes:string[] = [".cpp", ".hpp", ".tpp"];
 const	makefileNames:string[] = ["Makefile", "makefile"];
 
+export const	header_height : number = 11;
+export const	header_length: number = 80;
+
 // Recursive searching of .c and .h files
 export function	getFiles(root_dir: string): string[]
 {

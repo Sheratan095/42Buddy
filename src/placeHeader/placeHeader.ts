@@ -1,10 +1,9 @@
 import * as fs from 'fs';
 
 const	utils = require('./placerUtils');
+const	placerUtils = require('./placerUtils');
 const	normalPlacer = require('./normalHeader');
 const	makefilePlacer = require('./makefileHeader');
-
-const	header_height : number = 11;
 
 export function	placeHeader(file:string) :string
 {
@@ -65,10 +64,10 @@ function	getCopyStartingPosition(lines:string[], header_already_exist:boolean) :
 {
 	// If header already exist && there are no lines to copy
 	//	=> return the header height to skip it
-	if (lines.length - (header_height) <= 0 && header_already_exist)
-		return (header_height);
+	if (lines.length - (placerUtils.header_height) <= 0 && header_already_exist)
+		return (placerUtils.header_height);
 
-	let	i: number = (header_already_exist) ? header_height : 0;
+	let	i: number = (header_already_exist) ? placerUtils.header_height : 0;
 
 	// If there was already an empty line
 	//	=> skip it because it's placed by new header
