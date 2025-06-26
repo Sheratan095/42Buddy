@@ -31,6 +31,4 @@
 	=> the best optio should be to have a list of extension with some default options
 		and the capability to add a custom extension to that list
 
-[] Modify features and last updates in manifetst?
-
-[] Add username and mail configuration in confg view
+[X] Modify features and last updates in manifetst?

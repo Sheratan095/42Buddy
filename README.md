@@ -16,7 +16,7 @@ GitHub profile: [Sheratan095](https://github.com/Sheratan095)
 
 ## Configuration
 
-To conifigure the extension with your intra parameters you have to search in the settings for **42buddy** and set **Email** and **Username** proprieties
+To configure the extension, access the configuration panel in the sidebar. You can set your username, email, and choose which file types should have headers automatically placed.
 
 <br>
 

@@ -36,11 +36,13 @@ export class SecondViewProvider implements vscode.WebviewViewProvider
 		});
 	}
 
-	private saveFlags(flags: { cFiles: boolean; cppFiles: boolean; makefile: boolean })
+	private saveFlags(flags: { cFiles: boolean; cppFiles: boolean; makefile: boolean, username: string, email: string })
 	{
 		utils.setConfigValue("42Buddy.CFiles", flags.cFiles);
 		utils.setConfigValue("42Buddy.CppFiles", flags.cppFiles);
 		utils.setConfigValue("42Buddy.Makefile", flags.makefile);
+		utils.setConfigValue("42Buddy.Username", flags.username);
+		utils.setConfigValue("42Buddy.Email", flags.email);
 	}
 
 	getHtml(webview: vscode.Webview): string
@@ -69,6 +71,10 @@ export class SecondViewProvider implements vscode.WebviewViewProvider
 			html = html.replace('{{MAKEFILE_CHECKED}}', 'checked');
 		else
 			html = html.replace('{{MAKEFILE_CHECKED}}', '');
+
+		html = html.replace('{{USERNAME_VALUE}}', utils.getConfigValue("42Buddy.Username"));
+
+		html = html.replace('{{EMAIL_VALUE}}', utils.getConfigValue("42Buddy.Email"));
 
 		return (html);
 	}
