@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 
-const	utils = require('./placerUtils');
 const	placerUtils = require('./placerUtils');
 const	normalPlacer = require('./normalHeader');
 const	makefilePlacer = require('./makefileHeader');
@@ -18,7 +17,7 @@ export function	placeHeader(file:string) :string
 	// => i created a variable to avoid double calling an expensive method
 	let	header_already_exist : boolean;
 
-	if (utils.isMakefile(file))
+	if (placerUtils.isMakefile(file))
 		header_already_exist = makefilePlacer.headerExist_makefile(lines);
 	else
 		header_already_exist = normalPlacer.headerExist_normal(lines);
@@ -30,7 +29,7 @@ export function	placeHeader(file:string) :string
 	if (header_already_exist)
 	{
 		let	header_last_change_time: String = lines[8].slice(14, 33);
-		let	file_last_change_time: String = utils.getCorrectDateFormat(info.mtime);
+		let	file_last_change_time: String = placerUtils.getCorrectDateFormat(info.mtime);
 
 		if (header_last_change_time == file_last_change_time)
 			return (file);
@@ -39,7 +38,7 @@ export function	placeHeader(file:string) :string
 	// Get new header
 	let	new_lines:string[];
 
-	if (utils.isMakefile(file))
+	if (placerUtils.isMakefile(file))
 		new_lines = makefilePlacer.formatNewHeader_makefile(file, header_already_exist, lines, info);
 	else
 		new_lines = normalPlacer.formatNewHeader_normal(file, header_already_exist, lines, info);
