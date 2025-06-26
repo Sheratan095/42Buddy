@@ -20,29 +20,18 @@ export class SecondViewProvider implements vscode.WebviewViewProvider
 				case 'save_flags':
 					this.saveFlags(message.data);
 					break;
-				
-				case 'openTerminal':
-					vscode.commands.executeCommand('terminal.new');
-					break;
-				
-				case 'openFile':
-					vscode.commands.executeCommand('workbench.action.files.openFile');
-					break;
-				
-				case 'showCommands':
-					vscode.commands.executeCommand('workbench.action.showCommands');
-					break;
 			}
 		});
 	}
 
-	private saveFlags(flags: { cFiles: boolean; cppFiles: boolean; makefile: boolean, username: string, email: string })
+	private saveFlags(flags: { cFiles: boolean; cppFiles: boolean; makefile: boolean, username: string, email: string, countLines: boolean })
 	{
 		utils.setConfigValue("42Buddy.CFiles", flags.cFiles);
 		utils.setConfigValue("42Buddy.CppFiles", flags.cppFiles);
 		utils.setConfigValue("42Buddy.Makefile", flags.makefile);
 		utils.setConfigValue("42Buddy.Username", flags.username);
 		utils.setConfigValue("42Buddy.Email", flags.email);
+		utils.setConfigValue("42Buddy.CountLines", flags.countLines);
 	}
 
 	getHtml(webview: vscode.Webview): string
@@ -71,6 +60,12 @@ export class SecondViewProvider implements vscode.WebviewViewProvider
 			html = html.replace('{{MAKEFILE_CHECKED}}', 'checked');
 		else
 			html = html.replace('{{MAKEFILE_CHECKED}}', '');
+
+		if (utils.getConfigValue("42Buddy.CountLines"))
+			html = html.replace('{{COUNT_LINES_CHECKED}}', 'checked');
+		else
+			html = html.replace('{{COUNT_LINES_CHECKED}}', '');
+
 
 		html = html.replace('{{USERNAME_VALUE}}', utils.getConfigValue("42Buddy.Username"));
 

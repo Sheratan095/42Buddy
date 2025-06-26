@@ -24,7 +24,16 @@
 			<input type="checkbox" id="makefile" class="flag-checkbox" {{MAKEFILE_CHECKED}}>
 			<label for="makefile" class="flag-label">Makefile</label>
 		</div>
+
+		<hr>
+
+		<div class="flag-item" onclick="toggleCheckbox('count-lines')">
+			<input type="checkbox" id="count-lines" class="flag-checkbox" {{COUNT_LINES_CHECKED}}>
+			<label for="count-lines" class="flag-label">Count lines</label>
+		</div>
 	</div>
+
+	<hr>
 
 	<div class="user-info-container">
 		<div class="input-item">
@@ -61,7 +70,8 @@
 				cppFiles: document.getElementById('cpp-files').checked,
 				makefile: document.getElementById('makefile').checked,
 				username: document.getElementById('username').value,
-				email: document.getElementById('email').value
+				email: document.getElementById('email').value,
+				countLines: document.getElementById('count-lines').checked
 			};
 
 			vscode.postMessage({ command: 'save_flags', data: flags });

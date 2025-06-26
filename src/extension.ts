@@ -30,8 +30,8 @@ export function	activate(context: vscode.ExtensionContext)
 		vscode.window.registerWebviewViewProvider('configurationView', new SecondViewProvider(context))
 	);
 
-	if (utils.getConfigValue("42Buddy.CountLines") === true)
-		countLines.initializeDecorations(context);
+
+	countLines.initializeDecorations(context);
 
 }
 
