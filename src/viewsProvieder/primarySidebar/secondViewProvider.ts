@@ -56,9 +56,22 @@ export class SecondViewProvider implements vscode.WebviewViewProvider
 		
 		html = html.replace('{{CSS_URI}}', cssUri.toString());
 
-		// utils.getConfigValue("42Buddy.CFiles");
-		// utils.getConfigValue("42Buddy.CppFiles");
-		// utils.getConfigValue("42Buddy.Makefile");
+
+		// Replace the placeholders with the actual values from the configuration
+		if (utils.getConfigValue("42Buddy.CFiles"))
+			html = html.replace('{{C_FILES_CHECKED}}', 'checked');
+		else
+			html = html.replace('{{C_FILES_CHECKED}}', '');
+
+		if (utils.getConfigValue("42Buddy.CppFiles"))
+			html = html.replace('{{CPP_FILES_CHECKED}}', 'checked');
+		else
+			html = html.replace('{{CPP_FILES_CHECKED}}', '');
+
+		if (utils.getConfigValue("42Buddy.Makefile"))
+			html = html.replace('{{MAKEFILE_CHECKED}}', 'checked');
+		else
+			html = html.replace('{{MAKEFILE_CHECKED}}', '');
 
 		return (html);
 	}

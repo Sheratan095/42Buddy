@@ -11,17 +11,17 @@
 <body>
 	<div class="flags-container">
 		<div class="flag-item" onclick="toggleCheckbox('c-files')">
-			<input type="checkbox" id="c-files" class="flag-checkbox">
+			<input type="checkbox" id="c-files" class="flag-checkbox" {{C_FILES_CHECKED}}>
 			<label for="c-files" class="flag-label">C Files (.c, .h)</label>
 		</div>
 		
 		<div class="flag-item" onclick="toggleCheckbox('cpp-files')">
-			<input type="checkbox" id="cpp-files" class="flag-checkbox">
+			<input type="checkbox" id="cpp-files" class="flag-checkbox" {{CPP_FILES_CHECKED}}>
 			<label for="cpp-files" class="flag-label">C++ Files (.cpp, .hpp, .tpp)</label>
 		</div>
 		
 		<div class="flag-item" onclick="toggleCheckbox('makefile')">
-			<input type="checkbox" id="makefile" class="flag-checkbox" checked>
+			<input type="checkbox" id="makefile" class="flag-checkbox" {{MAKEFILE_CHECKED}}>
 			<label for="makefile" class="flag-label">Makefile</label>
 		</div>
 	</div>
