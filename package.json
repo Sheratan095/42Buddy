@@ -67,6 +67,11 @@
 					"type": "boolean",
 					"description": "Place 42 header in Mafile",
 					"default": false
+				},
+				"42Buddy.CountLines": {
+					"type": "boolean",
+					"description": "Count lines of functions in the current file",
+					"default": true
 				}
 			}
 		},

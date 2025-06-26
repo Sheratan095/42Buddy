@@ -4,6 +4,9 @@ import { SecondViewProvider } from './viewsProvieder/primarySidebar/secondViewPr
 
 // Musn't specify extension like this ('./commands.ts')
 const	commands = require('./commands');
+const	countLines = require('./countLines/countLines');
+
+const	utils = require('./utils');
 
 export function	activate(context: vscode.ExtensionContext)
 {
@@ -26,5 +29,9 @@ export function	activate(context: vscode.ExtensionContext)
 	context.subscriptions.push(
 		vscode.window.registerWebviewViewProvider('configurationView', new SecondViewProvider(context))
 	);
+
+	if (utils.getConfigValue("42Buddy.CountLines") === true)
+		countLines.initializeDecorations(context);
+
 }
 
