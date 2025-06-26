@@ -45,8 +45,8 @@ export class SecondViewProvider implements vscode.WebviewViewProvider
 
 	getHtml(webview: vscode.Webview): string
 	{
-		const	htmlPath = path.join(this.context.extensionPath, 'views', 'primarySidebar/secondView/index.html');
-		const	cssPath = path.join(this.context.extensionPath, 'views', 'primarySidebar/secondView/style.css');
+		const	htmlPath = path.join(this.context.extensionPath, 'views', 'primarySidebar/secondView/secondView.html');
+		const	cssPath = path.join(this.context.extensionPath, 'views', 'primarySidebar/secondView/secondView.css');
 
 		let		html = fs.readFileSync(htmlPath, 'utf8');
 		const	cssUri = webview.asWebviewUri(vscode.Uri.file(cssPath));

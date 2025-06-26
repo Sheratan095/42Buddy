@@ -35,8 +35,8 @@ export class FirstViewProvider implements vscode.WebviewViewProvider
 
 	getHtml(webview: vscode.Webview): string
 	{
-		const	htmlPath = path.join(this.context.extensionPath, 'views', 'primarySidebar/firstView/index.html');
-		const	cssPath = path.join(this.context.extensionPath, 'views', 'primarySidebar/firstView/style.css');
+		const	htmlPath = path.join(this.context.extensionPath, 'views', 'primarySidebar/firstView/firstView.html');
+		const	cssPath = path.join(this.context.extensionPath, 'views', 'primarySidebar/firstView/firstView.css');
 
 		let		html = fs.readFileSync(htmlPath, 'utf8');
 		const	cssUri = webview.asWebviewUri(vscode.Uri.file(cssPath));
