@@ -36,13 +36,18 @@ export function	initializeDecorations(context: vscode.ExtensionContext): void
 
 function	updateDecorations(): void
 {
-	if (utils.getConfigValue("42Buddy.CountLines") === false)
-		return;
-
 	const	editor = vscode.window.activeTextEditor;
-	// If no active editor, do nothing
 	if (!editor)
 		return;
+
+	if (utils.getConfigValue("42Buddy.CountLines") === false)
+	{
+		// Clear all decorations when disabled
+		if (decorationType) {
+			editor.setDecorations(decorationType, []);
+		}
+		return;
+	}
 
 	// Use editor document content instead of reading from file
 	const	document = editor.document;
