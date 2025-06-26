@@ -38,12 +38,9 @@ export class SecondViewProvider implements vscode.WebviewViewProvider
 
 	private saveFlags(flags: { cFiles: boolean; cppFiles: boolean; makefile: boolean })
 	{
-		const config = vscode.workspace.getConfiguration('42Buddy');
-		config.update('CFiles', flags.cFiles, vscode.ConfigurationTarget.Global);
-		config.update('CppFiles', flags.cppFiles, vscode.ConfigurationTarget.Global);
-		config.update('Makefile', flags.makefile, vscode.ConfigurationTarget.Global);
-		
-		vscode.window.showInformationMessage('Flags saved successfully!');
+		utils.setConfigValue("42Buddy.CFiles", flags.cFiles);
+		utils.setConfigValue("42Buddy.CppFiles", flags.cppFiles);
+		utils.setConfigValue("42Buddy.Makefile", flags.makefile);
 	}
 
 	getHtml(webview: vscode.Webview): string

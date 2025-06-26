@@ -81,6 +81,11 @@ export function	getConfigValue(key: string): any
 	return (vscode.workspace.getConfiguration().get(key));
 }
 
+export function	setConfigValue(key: string, value: any): void
+{
+	vscode.workspace.getConfiguration().update(key, value, vscode.ConfigurationTarget.Global);
+}
+
 // if a value isn't set
 //	=> 'redirect' to the setting page
 export function	checkSettings()

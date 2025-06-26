@@ -43,11 +43,13 @@
 
 		function saveFlags()
 		{
-			const flags = {
+			// Collect the state of the checkboxes
+			const	flags = {
 				cFiles: document.getElementById('c-files').checked,
 				cppFiles: document.getElementById('cpp-files').checked,
 				makefile: document.getElementById('makefile').checked
 			};
+
 			vscode.postMessage({ command: 'save_flags', data: flags });
 		}
 	</script>
