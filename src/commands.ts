@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 
 const	utils = require('./utils');
+const	placerUtils = require('./placeHeader/placerUtils');
 const	placer = require('./placeHeader/placeHeader');
 const	path = require('path');
 
@@ -17,7 +18,7 @@ export function	placeHeaderInAllFiles() : boolean
 	// We take as an assumption that just one folder is open in the workspace
 
 	let		current_dir = vscode.workspace.workspaceFolders[0].uri.fsPath;
-	const	files: string[] = utils.getFiles(current_dir);
+	const	files: string[] = placerUtils.getFiles(current_dir);
 
 	for (let file of files)
 		placer.placeHeader(file);
@@ -41,7 +42,7 @@ export function	placeHeaderInSingleFile() : boolean
 	const	fileName = activeEditor.document.fileName;
 
 	// Check if the file has a valid extension
-	if (!utils.isFileSupported(fileName))
+	if (!placerUtils.isFileSupported(fileName))
 		return (false);
 
 	placer.placeHeader(fileName);

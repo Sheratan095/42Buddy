@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const	utils = require('../utils');
+const	placerUtils = require('./placerUtils');
 
 const	header_height : number = 11;
 const	header_length: number = 80;
@@ -9,9 +10,8 @@ const	header_length: number = 80;
 // Check if in the file ther's already the header
 export function	headerExist_normal(lines: string[]): boolean
 {
-	if (lines.length < header_height) {
-		return false;
-	}
+	if (lines.length < header_height)
+		return (false);
 
 	for (let i = 0; i < header_height; i++)
 	{
@@ -44,7 +44,7 @@ export function	formatNewHeader_normal(file_path: string, header_already_exist:b
 		correct_creation_datetime = lines[7].slice(14, 33);
 	}
 	else
-		correct_creation_datetime = utils.getCorrectDateFormat(info.mtime);
+		correct_creation_datetime = placerUtils.getCorrectDateFormat(info.mtime);
 
 	// Removing all lines
 	fs.writeFileSync(file_path, '');
@@ -77,7 +77,7 @@ export function	formatNewHeader_normal(file_path: string, header_already_exist:b
 	header[7] += ' '.repeat(padding) + "#+#    #+#             */";
 
 	// header[8] (Update)
-	header[8] = `/*   Updated: ${utils.getCorrectDateFormat(new Date())} by ${utils.getConfigValue("42Buddy.Username")}`;
+	header[8] = `/*   Updated: ${placerUtils.getCorrectDateFormat(new Date())} by ${utils.getConfigValue("42Buddy.Username")}`;
 	padding = header_length - header[8].length - "###   ########.fr       */".length;
 	header[8] += ' '.repeat(padding) + "###   ########.fr       */";
 

@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-const	utils = require('../utils');
+const	utils = require('./placerUtils');
 const	normalPlacer = require('./normalHeader');
 const	makefilePlacer = require('./makefileHeader');
 
