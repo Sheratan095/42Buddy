@@ -1,11 +1,12 @@
 import * as vscode from 'vscode';
 
 const	utils = require('../utils');
+const	countLinesUtils = require('./countLinesUtils');
 
-let	decorationType: vscode.TextEditorDecorationType;
+let		decorationType: vscode.TextEditorDecorationType;
 
 
-export function initializeDecorations(context: vscode.ExtensionContext): void
+export function	initializeDecorations(context: vscode.ExtensionContext): void
 {
 	decorationType = vscode.window.createTextEditorDecorationType({
 		after: {
@@ -33,7 +34,7 @@ export function initializeDecorations(context: vscode.ExtensionContext): void
 	);
 }
 
-function updateDecorations(): void
+function	updateDecorations(): void
 {
 	if (utils.getConfigValue("42Buddy.CountLines") === false)
 		return;
@@ -45,12 +46,16 @@ function updateDecorations(): void
 
 	// Use editor document content instead of reading from file
 	const	document = editor.document;
+
+	if (countLinesUtils.isFileSupported(document.fileName) === false)
+		return;
+
 	const	text = document.getText();
-	let	lines: string[] = text.split(/\r?\n/);
+	let		lines: string[] = text.split(/\r?\n/);
 	
-	var	openBrace = 0;
-	var	decorations: vscode.DecorationOptions[] = [];
-	var	countLines = 0;
+	var		openBrace = 0;
+	var		decorations: vscode.DecorationOptions[] = [];
+	var		countLines = 0;
 
 	for (let i = 0; i < lines.length; i++)
 	{
