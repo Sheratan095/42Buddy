@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 
 const	utils = require('./utils');
-const	placer = require('./placeHeader');
+const	placer = require('./placeHeader/placeHeader');
 const	path = require('path');
 
 export function	placeHeaderInAllFiles() : boolean

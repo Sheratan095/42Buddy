@@ -1,11 +1,10 @@
 import * as fs from 'fs';
-import * as path from 'path';
 
-const	utils = require('./utils');
+const	utils = require('../utils');
 const	normalPlacer = require('./normalHeader');
+const	makefilePlacer = require('./makefileHeader');
 
-export const	header_height : number = 11;
-export const	header_length: number = 81;
+const	header_height : number = 11;
 
 export function	placeHeader(file:string) :string
 {
@@ -18,7 +17,12 @@ export function	placeHeader(file:string) :string
 	// Establish if header already exists
 	// headerExist() is required in two methods
 	// => i created a variable to avoid double calling an expensive method
-	let	header_already_exist : boolean = normalPlacer.headerExist_normal(lines);
+	let	header_already_exist : boolean;
+
+	if (utils.isMakefile(file))
+		header_already_exist = makefilePlacer.headerExist_makefile(lines);
+	else
+		header_already_exist = normalPlacer.headerExist_normal(lines);
 
 	// If header already exist
 	//	if the last change time in header is older than the actual last change time
@@ -34,7 +38,12 @@ export function	placeHeader(file:string) :string
 	}
 
 	// Get new header
-	let	new_lines:string[] = normalPlacer.formatNewHeader(file, header_already_exist, lines, info);
+	let	new_lines:string[];
+
+	if (utils.isMakefile(file))
+		new_lines = makefilePlacer.formatNewHeader_makefile(file, header_already_exist, lines, info);
+	else
+		new_lines = normalPlacer.formatNewHeader_normal(file, header_already_exist, lines, info);
 
 	// Get the lines to copy
 	let	elements_to_copy:string[] = lines.slice(getCopyStartingPosition(lines, header_already_exist));

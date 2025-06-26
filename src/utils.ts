@@ -43,7 +43,6 @@ export function	getFiles(root_dir: string): string[]
 export function	isFileSupported(filePath : string) : boolean
 {
 	const	extension = path.extname(filePath);
-	const	fileName = path.basename(filePath);
 
 	if (getConfigValue("42Buddy.CFiles") == true)
 		if (cTypes.includes(extension))
@@ -54,8 +53,17 @@ export function	isFileSupported(filePath : string) : boolean
 			return (true);
 
 	if (getConfigValue("42Buddy.Makefile") == true)
-		if (extension === ".mk" || makefileNames.includes(fileName))
+		if (isMakefile(filePath))
 			return (true);
+	return (false);
+}
+
+export function	isMakefile(filePath: string): boolean
+{
+	const	fileName = path.basename(filePath);
+
+	if (makefileNames.includes(fileName))
+		return (true);
 
 	return (false);
 }
