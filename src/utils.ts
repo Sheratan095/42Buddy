@@ -5,6 +5,7 @@ const path = require('path');
 
 const	cTypes:string[] = [".c", ".h"];
 const	cppTypes:string[] = [".cpp", ".hpp", ".tpp"];
+const	makefileNames:string[] = ["Makefile", "makefile"];
 
 // Recursive searching of .c and .h files
 export function	getFiles(root_dir: string): string[]
@@ -42,13 +43,18 @@ export function	getFiles(root_dir: string): string[]
 export function	isFileSupported(filePath : string) : boolean
 {
 	const	extension = path.extname(filePath);
+	const	fileName = path.basename(filePath);
 
-	if (cTypes.includes(extension))
-		return (true);
+	if (getConfigValue("42Buddy.CFiles") == true)
+		if (cTypes.includes(extension))
+			return (true);
 
-
-	if (getConfigValue("42Buddy.Cpp") == true)
+	if (getConfigValue("42Buddy.CppFiles") == true)
 		if (cppTypes.includes(extension))
+			return (true);
+
+	if (getConfigValue("42Buddy.Makefile") == true)
+		if (extension === ".mk" || makefileNames.includes(fileName))
 			return (true);
 
 	return (false);

@@ -2,6 +2,8 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
 
+const	utils = require('../../utils');
+
 export class SecondViewProvider implements vscode.WebviewViewProvider
 {
 	constructor(private readonly context: vscode.ExtensionContext) {}
@@ -15,6 +17,10 @@ export class SecondViewProvider implements vscode.WebviewViewProvider
 		webviewView.webview.onDidReceiveMessage(message =>
 		{
 			switch (message.command) {
+				case 'save_flags':
+					this.saveFlags(message.data);
+					break;
+				
 				case 'openTerminal':
 					vscode.commands.executeCommand('terminal.new');
 					break;
@@ -30,6 +36,16 @@ export class SecondViewProvider implements vscode.WebviewViewProvider
 		});
 	}
 
+	private saveFlags(flags: { cFiles: boolean; cppFiles: boolean; makefile: boolean })
+	{
+		const config = vscode.workspace.getConfiguration('42Buddy');
+		config.update('CFiles', flags.cFiles, vscode.ConfigurationTarget.Global);
+		config.update('CppFiles', flags.cppFiles, vscode.ConfigurationTarget.Global);
+		config.update('Makefile', flags.makefile, vscode.ConfigurationTarget.Global);
+		
+		vscode.window.showInformationMessage('Flags saved successfully!');
+	}
+
 	getHtml(webview: vscode.Webview): string
 	{
 		const	htmlPath = path.join(this.context.extensionPath, 'views', 'primarySidebar/secondView/index.html');
@@ -39,6 +55,10 @@ export class SecondViewProvider implements vscode.WebviewViewProvider
 		const	cssUri = webview.asWebviewUri(vscode.Uri.file(cssPath));
 		
 		html = html.replace('{{CSS_URI}}', cssUri.toString());
+
+		// utils.getConfigValue("42Buddy.CFiles");
+		// utils.getConfigValue("42Buddy.CppFiles");
+		// utils.getConfigValue("42Buddy.Makefile");
 
 		return (html);
 	}

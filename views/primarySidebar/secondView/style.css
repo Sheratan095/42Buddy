@@ -36,3 +36,28 @@ body {
 	cursor: pointer;
 	user-select: none;
 }
+
+.save-container {
+	margin-top: 20px;
+}
+
+.save-button {
+	color: #fff;
+	border: 1px solid #fff;
+	background-color: transparent;
+	border-radius: 4px;
+	margin: 5%;
+	padding: 10px;
+	cursor: pointer;
+	font-size: 12px;
+	width: 90%;
+}
+
+.save-button:hover {
+	border-color: #0264af;
+}
+
+.save-button:active {
+	border-color: #0264af;
+	background-color: #1990eb94;
+}

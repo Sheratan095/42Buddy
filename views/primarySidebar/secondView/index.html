@@ -17,20 +17,38 @@
 		
 		<div class="flag-item" onclick="toggleCheckbox('cpp-files')">
 			<input type="checkbox" id="cpp-files" class="flag-checkbox">
-			<label for="cpp-files" class="flag-label">C++ Files (.cpp, .hpp)</label>
+			<label for="cpp-files" class="flag-label">C++ Files (.cpp, .hpp, .tpp)</label>
 		</div>
 		
 		<div class="flag-item" onclick="toggleCheckbox('makefile')">
-			<input type="checkbox" id="makefile" class="flag-checkbox">
+			<input type="checkbox" id="makefile" class="flag-checkbox" checked>
 			<label for="makefile" class="flag-label">Makefile</label>
 		</div>
 	</div>
 
+	<div class="save-container">
+		<button class="save-button" onclick="saveFlags()">
+			Save
+		</button>
+	</div>
+
 	<script>
+		const vscode = acquireVsCodeApi();
+
 		function toggleCheckbox(checkboxId)
 		{
 			const	checkbox = document.getElementById(checkboxId);
 			checkbox.checked = !checkbox.checked;
+		}
+
+		function saveFlags()
+		{
+			const flags = {
+				cFiles: document.getElementById('c-files').checked,
+				cppFiles: document.getElementById('cpp-files').checked,
+				makefile: document.getElementById('makefile').checked
+			};
+			vscode.postMessage({ command: 'save_flags', data: flags });
 		}
 	</script>
 </body>
