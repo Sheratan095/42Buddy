@@ -6,7 +6,7 @@
 	"name": "42buddy",
 	"description": "A vscode extension to help all 42 students during their path in the school",
 	"displayName": "42Buddy",
-	"icon": "./Imgs/robot-dog.png",
+	"icon": "./Imgs/activity_bar_icon.png",
 	"publisher": "Sheratan",
 	"version": "3.2.0",
 	"engines": {
@@ -23,7 +23,7 @@
 				{
 					"id": "42Buddy",
 					"title": "42Buddy",
-					"icon": "Imgs/robot-dog.png"
+					"icon": "Imgs/activity_bar_icon.png"
 				}
 			]
 		},
@@ -33,13 +33,13 @@
 					"type": "webview",
 					"id": "commandsView",
 					"name": "Commands",
-					"icon": "Imgs/robot-dog.png"
+					"icon": "Imgs/activity_bar_icon.png"
 				},
 				{
 					"type": "webview",
 					"id": "configurationView",
 					"name": "Configurations",
-					"icon": "Imgs/robot-dog.png"
+					"icon": "Imgs/activity_bar_icon.png"
 				}
 			]
 		},
