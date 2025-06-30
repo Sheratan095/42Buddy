@@ -22,13 +22,14 @@ To configure the extension, access the configuration panel in the sidebar. You c
 
 ## Features
 
-All the features can be activated by control panel (_Ctrl + shift + p_)\
-All the features are under _42Buddy_ category
-
-
-- [42 header placer](#usage)
+  * [Header placer](#header-placer)
+  * [Count lines](#count-lines)
 
 <br>
+
+
+
+
 
 ### Header placer
 
@@ -37,6 +38,7 @@ This feature inserts a 42 header in .c, .h, .cpp, and .hpp files.
 You can chose to don't place 42 header in .cpp and .hpp files from the settings
 
 It can be activated by:
+- Buttons in sidebar menù
 - ctrl + shift + h : Inserts the header only in the currently open file
 - ctrl + h : Inserts the header recursively in all files within the first folder of the workspace.
 
@@ -58,7 +60,37 @@ It can be activated by:
 /* ************************************************************************** */
 ```
 
+<br>
 
+
+
+
+
+### Count lines
+
+This feature analyzes the source code to identify all function definitions and calculates the number of lines each function occupies.
+
+``` C
+void	42(void)
+{
+
+	printf("42\n");
+
+}
+――― 3 FUNCTION LINES ―――
+```
+
+
+If there is no line after the closing bracket, the message will be placed on the last available line.
+
+``` C
+void	42(void)
+{
+
+	printf("42\n");
+
+}――― 3 FUNCTION LINES ―――
+```
 
 <br>
 
@@ -68,4 +100,5 @@ It can be activated by:
   - [Configuration](#configuration)
   - [Features](#features)
     - [Header placer](#header-placer)
+    - [Count lines](#count-lines)
   - [TABLE OF CONTENT](#table-of-content)
