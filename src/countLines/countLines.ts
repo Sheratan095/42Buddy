@@ -81,21 +81,7 @@ function	updateDecorations(): void
 				openBrace--;
 				
 				if (openBrace === 0)
-				{
-					const	range = new vscode.Range(i+1, 0, i+1, 0);
-					const	decoration = {
-						range: range,
-						renderOptions:
-						{
-							after:
-							{
-								contentText: `――― ${(countLines > 0)?  countLines - 1 : 0} FUNCTION LINES ―――`,
-							}
-						}
-					}
-
-					decorations.push(decoration);
-				}
+					decorations.push(countLinesUtils.getDecorationText(i, countLines));
 			}
 		}
 	}

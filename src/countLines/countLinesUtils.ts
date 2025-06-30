@@ -1,3 +1,5 @@
+import * as vscode from 'vscode';
+
 const	utils = require('../utils');
 
 const fs = require('fs');
@@ -19,4 +21,38 @@ export function	isFileSupported(filePath : string) : boolean
 	// 		return (true);
 
 	return (false);
+}
+export function	getDecorationText(i: number, countLines: number) : vscode.DecorationOptions
+{
+	const	range: vscode.Range = new vscode.Range(i+1, 0, i+1, 0);
+	var		decoration: vscode.DecorationOptions;
+
+	if (countLines > 25)
+	{
+		decoration = {
+			range: range,
+			renderOptions:
+			{
+				after:
+				{
+					contentText: `⚠⚠ ${(countLines > 0)?  countLines - 1 : 0} FUNCTION LINES ⚠⚠ `,
+				}
+			}
+		}
+	}
+	else
+	{
+		decoration = {
+			range: range,
+			renderOptions:
+			{
+				after:
+				{
+					contentText: `――― ${(countLines > 0)?  countLines - 1 : 0} FUNCTION LINES ―――`,
+				}
+			}
+		}
+	}	
+
+	return (decoration);
 }
